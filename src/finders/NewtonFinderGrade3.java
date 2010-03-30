@@ -6,6 +6,7 @@ import misc.Differentiator;
 import misc.PolyFunction;
 
 // y = ax^3 + bx^2 + cx + d
+// mšgliche nullstellen 1-3
 public class NewtonFinderGrade3 implements FinderInterface {
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
 		Vector<Double> nullstellen = new Vector<Double>();
