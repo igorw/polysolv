@@ -15,11 +15,13 @@ public class PolyFunction implements Iterable<Entry<Integer, Double>> {
 		return koeffMap.get(grade);
 	}
 	
-	public void setKoeff(Integer grade, Double koeff) {
+	public PolyFunction setKoeff(Integer grade, Double koeff) {
 		koeffMap.put(grade, koeff);
 		if (grade > maxGrade) {
 			maxGrade = grade;
 		}
+		
+		return this;
 	}
 	
 	public boolean hasKoeff(Integer grade) {
