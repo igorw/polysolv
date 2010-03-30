@@ -1,8 +1,10 @@
 package misc;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
-public class PolyFunction {
+public class PolyFunction implements Iterable<Entry<Integer, Double>> {
 	private HashMap<Integer, Double> koeffMap = new HashMap<Integer, Double>();
 	
 	// in case of change from primitive
@@ -41,6 +43,7 @@ public class PolyFunction {
 		return result;
 	}
 	
+	@Override
 	public String toString() {
 		StringBuffer result = new StringBuffer();
 		
@@ -64,28 +67,25 @@ public class PolyFunction {
 		return result.toString();
 	}
 	
+	@Override
 	public boolean equals(Object o) {
-		if (!(o instanceof PolyFunction)) {
-			return false;
-		}
-		
-		PolyFunction f = (PolyFunction) o;
-		
-		if (f.getMaxGrade() != getMaxGrade()) {
-			return false;
-		}
-		
-		for (int i = 0; i <= maxGrade; i++) {
-			if (!f.hasKoeff(i)) {
-				return false;
-			}
-			
-			if (!f.getKoeff(i).equals(getKoeff(i))) {
-				System.out.println(f.getKoeff(i).equals(getKoeff(i)));
-				return false;
-			}
-		}
-		
-		return true;
+		return hashCode() == o.hashCode();
+	}
+	
+	@Override
+	public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        
+        for (Entry<Integer, Double> entry : this) {
+        	result = prime * result + entry.getKey().hashCode();
+        	result = prime * result + entry.getValue().hashCode();
+        }
+        
+        return result;
+	}
+	
+	public Iterator<Entry<Integer, Double>> iterator() {
+		return koeffMap.entrySet().iterator();
 	}
 }
