@@ -5,6 +5,8 @@ import java.util.HashMap;
 public class PolyFunction {
 	private HashMap<Integer, Double> koeffMap = new HashMap<Integer, Double>();
 	
+	// in case of change from primitive
+	// change equals() too
 	private int maxGrade = 0;
 	
 	public Double getKoeff(Integer grade) {
@@ -60,5 +62,30 @@ public class PolyFunction {
 		}
 		
 		return result.toString();
+	}
+	
+	public boolean equals(Object o) {
+		if (!(o instanceof PolyFunction)) {
+			return false;
+		}
+		
+		PolyFunction f = (PolyFunction) o;
+		
+		if (f.getMaxGrade() != getMaxGrade()) {
+			return false;
+		}
+		
+		for (int i = 0; i <= maxGrade; i++) {
+			if (!f.hasKoeff(i)) {
+				return false;
+			}
+			
+			if (!f.getKoeff(i).equals(getKoeff(i))) {
+				System.out.println(f.getKoeff(i).equals(getKoeff(i)));
+				return false;
+			}
+		}
+		
+		return true;
 	}
 }
