@@ -36,11 +36,8 @@ public class PolyFunction implements Iterable<Entry<Integer, Double>> {
 	public double calculate(double x) {
 		double result = 0;
 		
-		for (int i = maxGrade; i >= 0; i--) {
-			if (!hasKoeff(i)) {
-				continue;
-			}
-			result += getKoeff(i) * Math.pow(x, i);
+		for (Entry<Integer, Double> entry : this) {
+			result += entry.getValue() * Math.pow(x, entry.getKey());
 		}
 		
 		return result;
