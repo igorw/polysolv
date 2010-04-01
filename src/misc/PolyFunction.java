@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+// represents a polynomial function
 public class PolyFunction implements Iterable<Entry<Integer, Double>>, Cloneable {
 	private Map<Integer, Double> koeffMap = new HashMap<Integer, Double>();
 	

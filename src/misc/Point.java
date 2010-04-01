@@ -1,5 +1,6 @@
 package misc;
 
+// represents one point on a graph (x/y)
 public class Point {
 	private double x;
 	private double y;

@@ -7,6 +7,7 @@ import misc.PolyFunction;
 import org.junit.Test;
 
 public class FrameworkTest {
+	// make sure PolyFunction is Cloneable
 	@Test public void testPolyFunctionClone() {
 		PolyFunction f = new PolyFunction().
 			setKoeff(0, 5.0).

@@ -8,19 +8,20 @@ import misc.PolyFunction;
 // mšgliche nullstellen: genau eine
 public class LinearFinder implements FinderInterface {
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
+		// can only solve up to grade 1
 		if (f.getMaxGrade() > 1) {
 			throw new InvalidFuncException();
 		}
 		
-		Vector<Double> nullstellen = new Vector<Double>();
+		Vector<Double> results = new Vector<Double>();
 		
 		double a = f.getKoeff(1);
 		double b = f.getKoeff(0);
 		
 		// -b / a
 		double x = -b / a;
-		nullstellen.add(x);
+		results.add(x);
 		
-		return nullstellen;
+		return results;
 	}
 }

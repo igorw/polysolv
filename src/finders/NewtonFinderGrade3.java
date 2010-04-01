@@ -9,7 +9,7 @@ import misc.PolyFunction;
 // mšgliche nullstellen 1-3
 public class NewtonFinderGrade3 implements FinderInterface {
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
-		Vector<Double> nullstellen = new Vector<Double>();
+		Vector<Double> results = new Vector<Double>();
 		
 		/*double a = f.getKoeff(3);
 		double b = f.getKoeff(2);
@@ -37,7 +37,7 @@ public class NewtonFinderGrade3 implements FinderInterface {
 		System.out.println(newton(f, x1 - 0.00001, 10));
 		System.out.println(newton(f, x2 + 0.00001, 10));
 		
-		return nullstellen;
+		return results;
 	}
 	
 	// recursive newton

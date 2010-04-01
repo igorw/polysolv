@@ -8,11 +8,12 @@ import misc.PolyFunction;
 // mšgliche nullstellen: 0-2
 public class QuadricFinder implements FinderInterface {
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
-		Vector<Double> nullstellen = new Vector<Double>();
-		
+		// can only solve up to grade 2
 		if (f.getMaxGrade() > 2) {
 			throw new InvalidFuncException();
 		}
+		
+		Vector<Double> results = new Vector<Double>();
 		
 		double a = f.getKoeff(2);
 		double b = f.getKoeff(1);
@@ -20,10 +21,10 @@ public class QuadricFinder implements FinderInterface {
 		
 		// (-b +- sqrt(b^2-4ac)) / 2a
 		double x1 = (double) ((-b + Math.sqrt(Math.pow(b, 2)-4*a*c)) / 2*a);
-		nullstellen.add(x1);
+		results.add(x1);
 		double x2 = (double) ((-b - Math.sqrt(Math.pow(b, 2)-4*a*c)) / 2*a);
-		nullstellen.add(x2);
+		results.add(x2);
 		
-		return nullstellen;
+		return results;
 	}
 }
