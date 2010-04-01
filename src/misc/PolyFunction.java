@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class PolyFunction implements Iterable<Entry<Integer, Double>> {
+public class PolyFunction implements Iterable<Entry<Integer, Double>>, Cloneable {
 	private Map<Integer, Double> koeffMap = new HashMap<Integer, Double>();
 	
 	// in case of change from primitive
@@ -87,5 +87,11 @@ public class PolyFunction implements Iterable<Entry<Integer, Double>> {
 	
 	public Iterator<Entry<Integer, Double>> iterator() {
 		return koeffMap.entrySet().iterator();
+	}
+	
+	@Override
+	public PolyFunction clone() throws CloneNotSupportedException {
+		PolyFunction f = (PolyFunction) super.clone();
+		return f;
 	}
 }
