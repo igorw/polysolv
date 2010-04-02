@@ -50,7 +50,7 @@ public class FinderTest {
 		}
 	}
 	
-	@Test public void testNewtonFinderGrade3() {
+	@Test public void testNewtonFinder1() {
 		FinderInterface finder = new NewtonFinder();
 		
 		// probeprüfung 2e
@@ -64,6 +64,22 @@ public class FinderTest {
 			Vector<Double> results = finder.find(f1);
 			assertTrue(results.contains(-1.0));
 			assertTrue(results.contains(2.0));
+		} catch (InvalidFuncException e) {
+			fail();
+		}
+	}
+	
+	@Test public void testNewtonFinder2() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// x^3
+		// result = 0
+		PolyFunction f1 = new PolyFunction().
+			setKoeff(3, 1.0);
+		try {
+			Vector<Double> results = finder.find(f1);
+			assertEquals(1, results.size());
+			assertEquals((Double) 0.0, results.firstElement());
 		} catch (InvalidFuncException e) {
 			fail();
 		}
