@@ -141,4 +141,30 @@ public class FinderTest {
 			fail();
 		}
 	}
+	
+	@Test public void testNewtonFinder6() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// probeprüfung 7
+		// 2/3x^3 - 1/2x^2 - 36x + 6
+		// results = -7.0690, 0.1664, 7.6527
+		PolyFunction f1 = new PolyFunction().
+			setKoeff(3, 2.0/3.0).
+			setKoeff(2, -0.5).
+			setKoeff(1, -36.0).
+			setKoeff(0, 6.0);
+		try {
+			Vector<Double> results = finder.find(f1);
+			System.out.println(results);
+			assertEquals(3, results.size());
+			assertTrue(!results.get(0).isNaN());
+			assertTrue(!results.get(0).isInfinite());
+			assertTrue(!results.get(1).isNaN());
+			assertTrue(!results.get(1).isInfinite());
+			assertTrue(!results.get(2).isNaN());
+			assertTrue(!results.get(2).isInfinite());
+		} catch (InvalidFuncException e) {
+			fail();
+		}
+	}
 }
