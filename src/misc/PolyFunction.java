@@ -14,7 +14,7 @@ public class PolyFunction implements Iterable<Entry<Integer, Double>>, Cloneable
 	private int maxGrade = 0;
 	
 	public Double getKoeff(Integer grade) {
-		return koeffMap.get(grade);
+		return hasKoeff(grade) ? koeffMap.get(grade) : 0.0;
 	}
 	
 	public PolyFunction setKoeff(Integer grade, Double koeff) {
@@ -56,22 +56,33 @@ public class PolyFunction implements Iterable<Entry<Integer, Double>>, Cloneable
 		result.append("f(x) = ");
 		
 		for (int i = maxGrade; i >= 0; i--) {
-			if (i != maxGrade) {
-				result.append((getKoeff(i) >= 0.0) ? " + " : " - ");
-			} else {
+			// skip non-existent koeffs
+			if (!hasKoeff(i)) {
+				continue;
+			}
+			
+			// add initial - or +/- before next item
+			if (i == maxGrade) {
 				if (getKoeff(i) < 0.0) {
 					result.append("-");
 				}
+			} else {
+				result.append((getKoeff(i) >= 0.0) ? " + " : " - ");
 			}
 			
+			// x^0 == 1
 			if (i == 0) {
 				result.append(Math.abs(getKoeff(i)));
 				continue;
 			}
+			
+			// x^1 == x
 			if (i == 1) {
 				result.append(Math.abs(getKoeff(i)) + "x");
 				continue;
 			}
+			
+			// x^i
 			result.append(Math.abs(getKoeff(i)) + "x^" + i);
 		}
 		

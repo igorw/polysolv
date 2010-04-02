@@ -21,4 +21,13 @@ public class FrameworkTest {
 			fail();
 		}
 	}
+	
+	// empty koeffs should be 0
+	@Test public void testPolyFunctionEmptyKoeff() {
+		PolyFunction f = new PolyFunction().
+			setKoeff(0, 5.0).
+			setKoeff(2, 7.0);
+		
+		assertEquals((Double) 0.0, f.getKoeff(1));
+	}
 }
