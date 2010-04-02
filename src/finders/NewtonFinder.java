@@ -32,7 +32,19 @@ public class NewtonFinder implements FinderInterface {
 		// nullstellen x koordinaten der abgeleiteten funktion
 		// entsprechen den extrema von f
 		PolyFunction fa = Differentiator.differentiate(f);
-		Vector<Double> extrema = new QuadraticFinder().find(fa);
+		Vector<Double> extrema = null;
+		
+		if (f.getMaxGrade() == 3) {
+			// ableiten damit sie quadratisch ist
+			// nullstellen x koordinaten der abgeleiteten funktion
+			// entsprechen den extrema von f
+			extrema = new QuadraticFinder().find(fa);
+		} else if (f.getMaxGrade() > 3) {
+			// recursion
+			extrema = new NewtonFinder().find(fa);
+			System.out.println(fa);
+			System.out.println(extrema);
+		}
 		
 		Vector<ContextAwarePoint> points = preparePoints(f, extrema);
 		
