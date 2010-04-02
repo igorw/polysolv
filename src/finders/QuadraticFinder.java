@@ -6,11 +6,11 @@ import misc.PolyFunction;
 
 // y = ax^2 + bx + c
 // mšgliche nullstellen: 0-2
-public class QuadricFinder implements FinderInterface {
+public class QuadraticFinder implements FinderInterface {
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
 		// can only solve grade 2
 		if (f.getMaxGrade() != 2) {
-			throw new InvalidFuncException("QuadricFinder only supports grade 2");
+			throw new InvalidFuncException("QuadraticFinder only supports grade 2");
 		}
 		
 		Vector<Double> results = new Vector<Double>();

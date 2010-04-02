@@ -12,7 +12,7 @@ import finders.FinderInterface;
 import finders.InvalidFuncException;
 import finders.LinearFinder;
 import finders.NewtonFinder;
-import finders.QuadricFinder;
+import finders.QuadraticFinder;
 
 public class FinderTest {
 	@Test public void testLinearFinder() {
@@ -31,8 +31,8 @@ public class FinderTest {
 		}
 	}
 	
-	@Test public void testQuadricFinder() {
-		FinderInterface finder = new QuadricFinder();
+	@Test public void testQuadraticFinder() {
+		FinderInterface finder = new QuadraticFinder();
 		
 		// probeprüfung 2b
 		// 1/2x^2 - 2x - 6
