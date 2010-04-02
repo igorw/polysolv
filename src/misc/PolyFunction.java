@@ -39,8 +39,8 @@ public class PolyFunction implements Iterable<Entry<Integer, Double>>, Cloneable
 		return maxGrade;
 	}
 	
-	public double calculate(double x) {
-		double result = 0;
+	public Double calculate(double x) {
+		Double result = 0.0;
 		
 		for (Entry<Integer, Double> entry : this) {
 			result += entry.getValue() * Math.pow(x, entry.getKey());
@@ -109,8 +109,7 @@ public class PolyFunction implements Iterable<Entry<Integer, Double>>, Cloneable
 	
 	@Override
 	public PolyFunction clone() throws CloneNotSupportedException {
-		PolyFunction f = (PolyFunction) super.clone();
-		return f;
+		return (PolyFunction) super.clone();
 	}
 	
 	public Iterator<Entry<Integer, Double>> iterator() {
