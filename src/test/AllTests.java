@@ -7,6 +7,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
 	FrameworkTest.class,
 	DifferentiatorTest.class,
+	FinderTest.class,
 })
 public class AllTests {
 	// run all tests
