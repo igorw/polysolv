@@ -9,6 +9,11 @@ import misc.PolyFunction;
 // y = ax^3 + bx^2 + cx + d
 // mšgliche nullstellen 1-3
 public class NewtonFinder implements FinderInterface {
+	// constants
+	public static final int SEARCH_UNKNOWN = 0;
+	public static final int SEARCH_LEFT = 1;
+	public static final int SEARCH_RIGHT = 2;
+	
 	// precision/depth of recursive newton algorithm
 	private int newtonDepth = 10;
 	
@@ -41,29 +46,80 @@ public class NewtonFinder implements FinderInterface {
 				// extremum = nullstelle
 				results.add(x1);
 			} else {
-				// vorzeichen beachten
-				if (a > 0.0) {
-					// positives polynom 3ten grades
-					// von unten links nach oben rechts
-					
-					if (f.calculate(x1) > 0.0) {
-						// extremum Ÿber x-achse
-						// => links suchen
-						results.add(newton(f, x1 - 1, newtonDepth));
-						
-					} else /*if (f.calculate(x1) < 0.0)*/ {
-						// extremum unter x-achse
-						// => rechts suchen
-						results.add(newton(f, x1 + 1, newtonDepth));
-						
-					}
-				} else if (a < 0.0) {
+				int searchWhere = SEARCH_UNKNOWN;
+				
+				// von positivem polynom 3ten grades ausgehen
+				// von unten links nach oben rechts
+				if (f.calculate(x1) > 0.0) {
+					// extremum Ÿber x-achse
+					// => links suchen
+					searchWhere = SEARCH_LEFT;
+				} else /*if (f.calculate(x1) < 0.0)*/ {
+					// extremum unter x-achse
+					// => rechts suchen
+					searchWhere = SEARCH_RIGHT;
+				}
+				
+				if (a < 0.0) {
 					// negatives polynom 3ten grades
 					// von oben links nach unten rechts
+					// searchWhere muss invertiert werden
+					searchWhere = (searchWhere == SEARCH_LEFT) ? SEARCH_RIGHT : SEARCH_LEFT;
 				}
+				
+				// do the searching
+				// search either left or right
+				results.add(newton(f, x1 + (searchWhere == SEARCH_LEFT ? -1 : 1), newtonDepth));
 			}
 		} else {
-			// mehr als ein extremum
+			// positives polynom 3ten grades
+			// von unten links nach oben rechts
+			if (a > 0.0) {
+				Double prev = null;
+				for (Double x : fax) {
+					// iterate over all extrema
+					
+					if (f.calculate(x) == 0.0) {
+						// extremum = nullstelle
+						results.add(x);
+						
+						prev = x;
+						continue;
+					}
+					
+					if (prev == null) {
+						// first iteration
+						if (f.calculate(x) > 0.0) {
+							// Ÿber x-achse
+							// links suchen
+							results.add(newton(f, x - 1, newtonDepth));
+						}
+						
+						prev = x;
+						continue;
+					}
+					
+					// calculate coordinates of prev and current
+					double y1 = f.calculate(prev);
+					double y2 = f.calculate(x);
+					
+					// vorzeichen vergleichen
+					// falls es Šndert ist nullstelle dazwischen
+					// mit mittelwert suchen
+					if (y1 < 0 && y2 > 0 || y1 > 0 && y2 < 0) {
+						results.add(newton(f, (prev + x) / 2, newtonDepth));
+					}
+					
+					prev = x;
+				}
+				// after iteration
+				if (f.calculate(prev) < 0.0) {
+					// unter x-achse
+					// rechts suchen
+					results.add(newton(f, prev + 1, newtonDepth));
+				}
+			}
+			System.out.println(results);
 		}
 		
 		return results;
