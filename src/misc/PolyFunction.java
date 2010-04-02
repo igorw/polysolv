@@ -57,17 +57,22 @@ public class PolyFunction implements Iterable<Entry<Integer, Double>>, Cloneable
 		
 		for (int i = maxGrade; i >= 0; i--) {
 			if (i != maxGrade) {
-				result.append(" + ");
+				result.append((getKoeff(i) >= 0.0) ? " + " : " - ");
+			} else {
+				if (getKoeff(i) < 0.0) {
+					result.append("-");
+				}
 			}
+			
 			if (i == 0) {
-				result.append(getKoeff(i));
+				result.append(Math.abs(getKoeff(i)));
 				continue;
 			}
 			if (i == 1) {
-				result.append(getKoeff(i) + "x");
+				result.append(Math.abs(getKoeff(i)) + "x");
 				continue;
 			}
-			result.append(getKoeff(i) + "x^" + i);
+			result.append(Math.abs(getKoeff(i)) + "x^" + i);
 		}
 		
 		return result.toString();
