@@ -10,7 +10,7 @@ public class LinearFinder implements FinderInterface {
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
 		// can only solve up to grade 1
 		if (f.getMaxGrade() > 1) {
-			throw new InvalidFuncException();
+			throw new InvalidFuncException("LinearFinder only supports grade <= 1");
 		}
 		
 		Vector<Double> results = new Vector<Double>();

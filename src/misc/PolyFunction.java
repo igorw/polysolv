@@ -18,6 +18,11 @@ public class PolyFunction implements Iterable<Entry<Integer, Double>>, Cloneable
 	}
 	
 	public PolyFunction setKoeff(Integer grade, Double koeff) {
+		// empty koeffs are useless
+		if (koeff.equals(0.0)) {
+			return this;
+		}
+		
 		koeffMap.put(grade, koeff);
 		if (grade > maxGrade) {
 			maxGrade = grade;
