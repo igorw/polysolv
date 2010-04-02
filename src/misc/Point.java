@@ -2,25 +2,28 @@ package misc;
 
 // represents one point on a graph (x/y)
 public class Point {
-	private double x;
-	private double y;
+	private Double x = 0.0;
+	private Double y = 0.0;
 	
-	public Point(double x, double y) {
+	public Point() {
+	}
+	
+	public Point(Double x, Double y) {
 		setX(x);
 		setY(y);
 	}
 	
-	public void setX(double x) {
+	public void setX(Double x) {
 		this.x = x;
 	}
-	public double getX() {
+	public Double getX() {
 		return x;
 	}
 	
-	public void setY(double y) {
+	public void setY(Double y) {
 		this.y = y;
 	}
-	public double getY() {
+	public Double getY() {
 		return y;
 	}
 }
