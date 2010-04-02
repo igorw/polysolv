@@ -2,7 +2,7 @@ package controller;
 
 import misc.PolyFunction;
 import finders.FinderInterface;
-import finders.NewtonFinderGrade3;
+import finders.NewtonFinder;
 
 public class Application {
 	public void run() throws Exception {
@@ -13,7 +13,7 @@ public class Application {
 			setKoeff(3, 1.0);
 		System.out.println(f);
 		
-		FinderInterface finder = new NewtonFinderGrade3();
+		FinderInterface finder = new NewtonFinder();
 		for (double x : finder.find(f)) {
 			System.out.println(x);
 		}

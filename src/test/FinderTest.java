@@ -11,7 +11,7 @@ import org.junit.Test;
 import finders.FinderInterface;
 import finders.InvalidFuncException;
 import finders.LinearFinder;
-import finders.NewtonFinderGrade3;
+import finders.NewtonFinder;
 import finders.QuadricFinder;
 
 public class FinderTest {
@@ -51,7 +51,7 @@ public class FinderTest {
 	}
 	
 	@Test public void testNewtonFinderGrade3() {
-		FinderInterface finder = new NewtonFinderGrade3();
+		FinderInterface finder = new NewtonFinder();
 		
 		// probeprüfung 2e
 		// x^3 - 3x - 2

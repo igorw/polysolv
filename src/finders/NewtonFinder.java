@@ -8,7 +8,7 @@ import misc.PolyFunction;
 
 // y = ax^3 + bx^2 + cx + d
 // mšgliche nullstellen 1-3
-public class NewtonFinderGrade3 implements FinderInterface {
+public class NewtonFinder implements FinderInterface {
 	// precision/depth of recursive newton algorithm
 	private int newtonDepth = 10;
 	
