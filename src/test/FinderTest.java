@@ -18,6 +18,7 @@ public class FinderTest {
 		FinderInterface finder = new LinearFinder();
 		
 		// -2/3x + 5
+		// result = 7.5
 		PolyFunction f1 = new PolyFunction().
 			setKoeff(0, 5.0).
 			setKoeff(1, -2.0/3.0);
@@ -32,6 +33,7 @@ public class FinderTest {
 		FinderInterface finder = new QuadricFinder();
 		
 		// 1/2x^2 - 2x - 6
+		// results = -2.0, 6.0
 		PolyFunction f1 = new PolyFunction().
 			setKoeff(0, -6.0).
 			setKoeff(1, -2.0).
