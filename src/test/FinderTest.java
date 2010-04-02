@@ -70,12 +70,29 @@ public class FinderTest {
 	}
 	
 	@Test public void testNewtonFinder2() {
-		FinderInterface finder = new NewtonFinder();
 		
+		FinderInterface finder = new NewtonFinder();
 		// x^3
 		// result = 0
 		PolyFunction f1 = new PolyFunction().
 			setKoeff(3, 1.0);
+		try {
+			Vector<Double> results = finder.find(f1);
+			assertEquals(1, results.size());
+			assertEquals((Double) 0.0, results.firstElement());
+		} catch (InvalidFuncException e) {
+			fail();
+		}
+	}
+	
+	@Test public void testNewtonFinder3() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// -x^3 - 3x
+		// result = 0
+		PolyFunction f1 = new PolyFunction().
+			setKoeff(3, -1.0).
+			setKoeff(1, -3.0);
 		try {
 			Vector<Double> results = finder.find(f1);
 			assertEquals(1, results.size());
