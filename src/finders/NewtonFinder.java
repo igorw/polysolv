@@ -72,9 +72,10 @@ public class NewtonFinder implements FinderInterface {
 				results.add(newton(f, x1 + (searchWhere == SEARCH_LEFT ? -1 : 1), newtonDepth));
 			}
 		} else {
-			// positives polynom 3ten grades
-			// von unten links nach oben rechts
 			if (a > 0.0) {
+				// positives polynom 3ten grades
+				// von unten links nach oben rechts
+				
 				Double prev = null;
 				for (Double x : fax) {
 					// iterate over all extrema
@@ -119,7 +120,6 @@ public class NewtonFinder implements FinderInterface {
 					results.add(newton(f, prev + 1, newtonDepth));
 				}
 			}
-			System.out.println(results);
 		}
 		
 		return results;
