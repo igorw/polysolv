@@ -70,8 +70,8 @@ public class FinderTest {
 	}
 	
 	@Test public void testNewtonFinder2() {
-		
 		FinderInterface finder = new NewtonFinder();
+		
 		// x^3
 		// result = 0
 		PolyFunction f1 = new PolyFunction().
