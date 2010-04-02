@@ -14,14 +14,14 @@ public class Point {
 	}
 	
 	public void setX(Double x) {
-		this.x = x;
+		this.x = (x == -0.0) ? 0.0 : x;
 	}
 	public Double getX() {
 		return x;
 	}
 	
 	public void setY(Double y) {
-		this.y = y;
+		this.y = (y == -0.0) ? 0.0 : y;
 	}
 	public Double getY() {
 		return y;
