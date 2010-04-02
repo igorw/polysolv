@@ -3,6 +3,7 @@ package finders;
 import java.util.Collections;
 import java.util.Vector;
 
+import misc.Apex;
 import misc.Differentiator;
 import misc.Point;
 import misc.PolyFunction;
@@ -17,15 +18,15 @@ public class NewtonFinder implements FinderInterface {
 	// offset for searching left/right
 	private int newtonOffset = 100;
 	
-	private double a, b, c, d;
+	private double a/*, b, c, d*/;
 	
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
 		Vector<Double> results = new Vector<Double>();
 		
 		a = f.getKoeff(3);
-		b = f.getKoeff(2);
+		/*b = f.getKoeff(2);
 		c = f.getKoeff(1);
-		d = f.getKoeff(0);
+		d = f.getKoeff(0);*/
 		
 		// ableiten damit sie quadratisch ist
 		// nullstellen x koordinaten der abgeleiteten funktion
@@ -34,6 +35,13 @@ public class NewtonFinder implements FinderInterface {
 		Vector<Double> extrema = new QuadraticFinder().find(fa);
 		
 		Vector<ContextAwarePoint> points = preparePoints(f, extrema);
+		
+		if (points.size() == 0) {
+			// keine nullstelle der ableitung gefunden
+			// scheitelpunkt der ableitung entspricht sattelpunkt
+			results.add(Apex.apex(fa).getX());
+			return results;
+		}
 		
 		if (points.size() == 1) {
 			// nur ein extremum
@@ -80,6 +88,10 @@ public class NewtonFinder implements FinderInterface {
 		return results;
 	}
 	
+	// make x coordinates aware of roots
+	// in certain cases it can be empty
+	// in which case there is a saddle point
+	// this case must be handled by the caller
 	public Vector<ContextAwarePoint> preparePoints(PolyFunction f, Vector<Double> extrema) {
 		// extrema aufsteigend sortieren
 		Collections.sort(extrema);
@@ -119,20 +131,22 @@ public class NewtonFinder implements FinderInterface {
 			prev = current;
 		}
 		
-		ContextAwarePoint firstPoint = points.firstElement();
-		if (a > 0.0 && firstPoint.getPoint().getY() > 0.0 ||
-			a < 0.0 && firstPoint.getPoint().getY() < 0.0) {
-			// Ÿber x-achse
-			// links suchen
-			firstPoint.setLeftRoot(true);
-		}
+		if (points.size() > 0) {
+			ContextAwarePoint firstPoint = points.firstElement();
+			if (a > 0.0 && firstPoint.getPoint().getY() > 0.0 ||
+				a < 0.0 && firstPoint.getPoint().getY() < 0.0) {
+				// Ÿber x-achse
+				// links suchen
+				firstPoint.setLeftRoot(true);
+			}
 
-		ContextAwarePoint lastPoint = points.lastElement();
-		if (a > 0.0 && lastPoint.getPoint().getY() < 0.0 ||
-			a < 0.0 && lastPoint.getPoint().getY() > 0.0) {
-			// unter x-achse
-			// rechts suchen
-			lastPoint.setRightRoot(true);
+			ContextAwarePoint lastPoint = points.lastElement();
+			if (a > 0.0 && lastPoint.getPoint().getY() < 0.0 ||
+				a < 0.0 && lastPoint.getPoint().getY() > 0.0) {
+				// unter x-achse
+				// rechts suchen
+				lastPoint.setRightRoot(true);
+			}
 		}
 		
 		return points;
@@ -154,7 +168,6 @@ public class NewtonFinder implements FinderInterface {
 	// a point that knows where roots (nullstellen) are
 	private class ContextAwarePoint {
 		private Point point = new Point();
-		private PolyFunction f;
 		
 		// where are the roots
 		private boolean isRoot = false,
@@ -162,7 +175,6 @@ public class NewtonFinder implements FinderInterface {
 						rightRoot = false;
 		
 		public ContextAwarePoint(Double x, PolyFunction f) {
-			this.f = f;
 			point.setX(x);
 			point.setY(f.calculate(x));
 		}
