@@ -107,13 +107,13 @@ public class PolyFunction implements Iterable<Entry<Integer, Double>>, Cloneable
         return result;
 	}
 	
-	public Iterator<Entry<Integer, Double>> iterator() {
-		return koeffMap.entrySet().iterator();
-	}
-	
 	@Override
 	public PolyFunction clone() throws CloneNotSupportedException {
 		PolyFunction f = (PolyFunction) super.clone();
 		return f;
+	}
+	
+	public Iterator<Entry<Integer, Double>> iterator() {
+		return koeffMap.entrySet().iterator();
 	}
 }
