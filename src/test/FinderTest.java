@@ -22,8 +22,8 @@ public class FinderTest {
 		// -2/3x + 5
 		// result = 7.5
 		PolyFunction f1 = new PolyFunction().
-			setKoeff(0, 5.0).
-			setKoeff(1, -2.0/3.0);
+			setKoeff(1, -2.0/3.0).
+			setKoeff(0, 5.0);
 		try {
 			assertEquals((Double) 7.5, finder.find(f1).firstElement());
 		} catch (InvalidFuncException e) {
@@ -38,9 +38,9 @@ public class FinderTest {
 		// 1/2x^2 - 2x - 6
 		// results = -2, 6
 		PolyFunction f1 = new PolyFunction().
-			setKoeff(0, -6.0).
+			setKoeff(2, 0.5).
 			setKoeff(1, -2.0).
-			setKoeff(2, 0.5);
+			setKoeff(0, -6.0);
 		try {
 			Vector<Double> results = finder.find(f1);
 			assertTrue(results.contains(-2.0));
@@ -57,9 +57,9 @@ public class FinderTest {
 		// x^3 - 3x - 2
 		// results = -1, 2
 		PolyFunction f1 = new PolyFunction().
-			setKoeff(0, -2.0).
+			setKoeff(3, 1.0).
 			setKoeff(1, -3.0).
-			setKoeff(3, 1.0);
+			setKoeff(0, -2.0);
 		try {
 			Vector<Double> results = finder.find(f1);
 			assertTrue(results.contains(-1.0));
