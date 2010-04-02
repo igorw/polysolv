@@ -27,16 +27,16 @@ public class QuadricFinder implements FinderInterface {
 			// two solutions
 			
 			// (-b +- sqrt(b^2-4ac)) / 2a
-			double x1 = (double) ((-b + Math.sqrt(Math.pow(b, 2)-4*a*c)) / 2*a);
+			double x1 = (double) ((-b + Math.sqrt(Math.pow(b, 2)-4*a*c)) / (2*a));
 			results.add(x1);
-			double x2 = (double) ((-b - Math.sqrt(Math.pow(b, 2)-4*a*c)) / 2*a);
+			double x2 = (double) ((-b - Math.sqrt(Math.pow(b, 2)-4*a*c)) / (2*a));
 			results.add(x2);
 			
 		} else if (discriminant == 0.0) {
 			// one solution
 			
 			// (-b + sqrt(b^2-4ac)) / 2a
-			double x1 = (double) ((-b + Math.sqrt(Math.pow(b, 2)-4*a*c)) / 2*a);
+			double x1 = (double) ((-b + Math.sqrt(Math.pow(b, 2)-4*a*c)) / (2*a));
 			results.add(x1);
 			
 		} else /* if (discriminant < 0.0) */ {
