@@ -60,7 +60,6 @@ public class FinderTest {
 			setKoeff(0, -2.0).
 			setKoeff(1, -3.0).
 			setKoeff(3, 1.0);
-		System.out.println(f1);
 		try {
 			Vector<Double> results = finder.find(f1);
 			assertTrue(results.contains(-1.0));

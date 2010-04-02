@@ -1,5 +1,6 @@
 package finders;
 
+import java.util.Collections;
 import java.util.Vector;
 
 import misc.Differentiator;
@@ -14,31 +15,56 @@ public class NewtonFinderGrade3 implements FinderInterface {
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
 		Vector<Double> results = new Vector<Double>();
 		
-		/*double a = f.getKoeff(3);
+		double a = f.getKoeff(3);
 		double b = f.getKoeff(2);
 		double c = f.getKoeff(1);
-		double d = f.getKoeff(0);*/
+		double d = f.getKoeff(0);
 		
 		// ableiten damit sie quadratisch ist
 		PolyFunction fa = Differentiator.differentiate(f);
 		
-		System.out.println(fa);
-		
 		// nullstellen x koordinaten der abgeleiteten funktion
+		// entsprechen den extrema von f
 		Vector<Double> fax = new QuadricFinder().find(fa);
-		double x1 = fax.get(0);
-		double x2 = fax.get(1);
 		
-		// aufsteigend sortieren
-		if (x1 > x2) {
-			double tmp = x1;
-			x1 = x2;
-			x2 = tmp;
+		// extrema aufsteigend sortieren
+		Collections.sort(fax);
+		
+		if (fax.size() == 1) {
+			// nur ein extremum
+			// => sattelpunkt
+			// => nur eine nullstelle
+			
+			double x1 = fax.firstElement();
+			
+			if (f.calculate(x1) == 0.0) {
+				// extremum = nullstelle
+				results.add(x1);
+			} else {
+				// vorzeichen beachten
+				if (a > 0.0) {
+					// positives polynom 3ten grades
+					// von unten links nach oben rechts
+					
+					if (f.calculate(x1) > 0.0) {
+						// extremum Ÿber x-achse
+						// => links suchen
+						results.add(newton(f, x1 - 1, newtonDepth));
+						
+					} else /*if (f.calculate(x1) < 0.0)*/ {
+						// extremum unter x-achse
+						// => rechts suchen
+						results.add(newton(f, x1 + 1, newtonDepth));
+						
+					}
+				} else if (a < 0.0) {
+					// negatives polynom 3ten grades
+					// von oben links nach unten rechts
+				}
+			}
+		} else {
+			// mehr als ein extremum
 		}
-		
-		// still one missing in between
-		System.out.println(newton(f, x1 - 0.00001, newtonDepth));
-		System.out.println(newton(f, x2 + 0.00001, newtonDepth));
 		
 		return results;
 	}
