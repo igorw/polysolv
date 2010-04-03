@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Vector;
 
 import misc.Apex;
-import misc.Differentiator;
+import misc.Differentiate;
 import misc.Point;
 import misc.PolyFunction;
 
@@ -31,7 +31,7 @@ public class NewtonFinder implements FinderInterface {
 		// ableiten damit sie quadratisch ist
 		// nullstellen x koordinaten der abgeleiteten funktion
 		// entsprechen den extrema von f
-		PolyFunction fa = Differentiator.differentiate(f);
+		PolyFunction fa = Differentiate.differentiate(f);
 		Vector<Double> extrema = null;
 		
 		if (f.getMaxGrade() == 3) {
@@ -168,7 +168,7 @@ public class NewtonFinder implements FinderInterface {
 	// prevValue = startValue
 	// Xn+1 = Xn - (f(Xn) / f'(Xn))
 	public Double newton(PolyFunction f, double prevValue, int depth) {
-		PolyFunction fa = Differentiator.differentiate(f);
+		PolyFunction fa = Differentiate.differentiate(f);
 		double x = prevValue - (f.calculate(prevValue) / fa.calculate(prevValue));
 		if (depth > 0) {
 			return newton(f, x, --depth);

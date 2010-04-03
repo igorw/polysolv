@@ -2,7 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 
-import misc.Differentiator;
+import misc.Differentiate;
 import misc.PolyFunction;
 
 import org.junit.Test;
@@ -22,7 +22,7 @@ public class DifferentiatorTest {
 			setKoeff(0, 1 * 5.0);
 			
 		
-		assertEquals(df, Differentiator.differentiate(f));
+		assertEquals(df, Differentiate.differentiate(f));
 	}
 
 }

@@ -2,7 +2,7 @@ package misc;
 
 import java.util.Map.Entry;
 
-public class Differentiator {
+public class Differentiate {
 	// differentiate polynomial 
 	static public PolyFunction differentiate(PolyFunction f) {
 		PolyFunction a = new PolyFunction();
