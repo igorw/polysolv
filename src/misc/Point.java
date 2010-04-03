@@ -29,6 +29,11 @@ public class Point {
 	}
 	
 	@Override
+	public String toString() {
+		return "point (" + x + "|" + y + ")";
+	}
+	
+	@Override
 	public boolean equals(Object o) {
 		return hashCode() == o.hashCode();
 	}
