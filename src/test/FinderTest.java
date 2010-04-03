@@ -155,7 +155,30 @@ public class FinderTest {
 			setKoeff(0, 6.0);
 		try {
 			Vector<Double> results = finder.find(f1);
-			System.out.println(results);
+			assertEquals(3, results.size());
+			assertTrue(!results.get(0).isNaN());
+			assertTrue(!results.get(0).isInfinite());
+			assertTrue(!results.get(1).isNaN());
+			assertTrue(!results.get(1).isInfinite());
+			assertTrue(!results.get(2).isNaN());
+			assertTrue(!results.get(2).isInfinite());
+		} catch (InvalidFuncException e) {
+			fail();
+		}
+	}
+	
+	@Test public void testNewtonFinder7() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// has division by 0 => NaN
+		// probeprüfung 2f (first part)
+		// -2.0x^3 + 6x
+		// results = -1.7320, 0, 1.7320
+		PolyFunction f1 = new PolyFunction().
+			setKoeff(3, -2.0).
+			setKoeff(1, 6.0);
+		try {
+			Vector<Double> results = finder.find(f1);
 			assertEquals(3, results.size());
 			assertTrue(!results.get(0).isNaN());
 			assertTrue(!results.get(0).isInfinite());
