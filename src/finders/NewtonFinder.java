@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Vector;
 
 import misc.Apex;
+import misc.Bisect;
 import misc.Differentiate;
 import misc.Point;
 import misc.PolyFunction;
@@ -76,7 +77,7 @@ public class NewtonFinder implements FinderInterface {
 			if (firstPoint.hasLeftRoot()) {
 				try {
 					Range range = findRangeLeft(firstPoint.getPoint().getX(), f);
-					range = bisectRange(range, f, bisectDepth);
+					range = new Bisect().bisect(range, f, bisectDepth);
 					System.out.println(range);
 				} catch (RangeNotFoundException e) {
 					e.printStackTrace();
@@ -216,31 +217,6 @@ public class NewtonFinder implements FinderInterface {
 		
 		// we did not find a good range
 		throw new RangeNotFoundException();
-	}
-	
-	// bisect a range recursively
-	// return a more precise range
-	// close to y=0
-	// f(x1) < 0 < f(x2)
-	private Range bisectRange(Range range, PolyFunction f, Integer bisectDepth) {
-		if (bisectDepth == 0) {
-			// we have our result
-			return range;
-		}
-		
-		Double middle = range.getMiddle();
-		
-		if (f.calculate(middle) > 0) {
-			// middle is larger than 0
-			// 0 is left of the middle
-			// use right half of the range
-			return bisectRange(new Range(middle, range.getX2()), f, bisectDepth - 1);
-		} else {
-			// middle is lower than 0
-			// 0 is right of the middle
-			// use left half of the range
-			return bisectRange(new Range(range.getX1(), middle), f, bisectDepth - 1);
-		}
 	}
 	
 	// recursive newton
