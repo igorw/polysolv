@@ -8,6 +8,7 @@ import org.junit.runners.Suite;
 	FrameworkTest.class,
 	DifferentiatorTest.class,
 	FinderTest.class,
+	NewtonInternalsTest.class,
 })
 public class AllTests {
 	// run all tests

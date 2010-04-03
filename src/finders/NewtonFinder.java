@@ -18,6 +18,9 @@ public class NewtonFinder implements FinderInterface {
 	// offset for searching left/right
 	private int newtonOffset = 100;
 	
+	// amount of range bisect iterations
+	private int bisectDepth = 1000;
+	
 	private double a/*, b, c, d*/;
 	
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
@@ -70,6 +73,13 @@ public class NewtonFinder implements FinderInterface {
 			// mehr als ein extremum
 			ContextAwarePoint firstPoint = points.firstElement();
 			if (firstPoint.hasLeftRoot()) {
+				try {
+					Vector<Double> range = findRangeLeft(firstPoint.getPoint().getX(), f);
+					bisectRange(range.firstElement(), range.lastElement(), f, bisectDepth);
+					System.out.println("range: " + range);
+				} catch (RangeNotFoundException e) {
+					e.printStackTrace();
+				}
 				results.add(newton(f, firstPoint.getPoint().getX() - newtonOffset, newtonDepth));
 			}
 			
@@ -99,7 +109,7 @@ public class NewtonFinder implements FinderInterface {
 		
 		return results;
 	}
-	
+
 	// make x coordinates aware of roots
 	// in certain cases it can be empty
 	// in which case there is a saddle point
@@ -164,10 +174,79 @@ public class NewtonFinder implements FinderInterface {
 		return points;
 	}
 	
+	// find a range on the left side
+	// @todo the same for right and in between
+	public Vector<Double> findRangeLeft(Double x, PolyFunction f) throws RangeNotFoundException {
+		Double prev = null, prevResult = null;
+		
+		// hard-coded depth
+		for (int i = 0; i < 10; i++) {
+			// current x
+			double current = x - Math.pow(10, i);
+			
+			// current y
+			double result = f.calculate(current);
+			
+			// first iteration
+			if (prev == null) {
+				prev = current;
+				prevResult = result;
+				continue;
+			}
+			
+			// arithmetic sign change
+			// we have our range
+			if (prevResult < 0.0 && result > 0.0 ||
+				prevResult > 0.0 && result < 0.0) {
+				// return vector of size 2
+				Vector<Double> range = new Vector<Double>();
+				range.add(prev);
+				range.add(current);
+				Collections.sort(range);
+				return range;
+			}
+			
+			// special case
+			// we actually found the root
+			// return something close
+			if (result == 0.0) {
+				Vector<Double> range = new Vector<Double>();
+				range.add(prev);
+				range.add(current - 1.0);
+				Collections.sort(range);
+				return range;
+			}
+			
+			prev = current;
+			prevResult = result;
+		}
+		
+		// we did not find a good range
+		throw new RangeNotFoundException();
+	}
+	
+	// bisect a range
+	// return a more precise range
+	// x1 < x2
+	private Vector<Double> bisectRange(Double x1, Double x2, PolyFunction f, int bisectDepth) {
+		if (bisectDepth == 0) {
+			// we have our result
+			Vector<Double> range = new Vector<Double>();
+			range.add(x1);
+			range.add(x2);
+			Collections.sort(range);
+			return range;
+		}
+		
+		Double mid = (x1 + x2) / 2.0;
+		
+		if (f.calculate(mid) > )
+	}
+	
 	// recursive newton
 	// prevValue = startValue
 	// Xn+1 = Xn - (f(Xn) / f'(Xn))
-	public Double newton(PolyFunction f, double prevValue, int depth) {
+	public Double newton(PolyFunction f, Double prevValue, Integer depth) {
 		PolyFunction fa = Differentiate.differentiate(f);
 		double x = prevValue - (f.calculate(prevValue) / fa.calculate(prevValue));
 		if (depth > 0) {
@@ -175,6 +254,12 @@ public class NewtonFinder implements FinderInterface {
 		} else {
 			return x;
 		}
+	}
+	
+	// helper function to check if sign changed
+	static public boolean signChange(Double y1, Double y2) {
+		return (y1 < 0 && y2 > 0 ||
+				y1 > 0 && y2 < 0);
 	}
 	
 	// a point that knows where roots (nullstellen) are
