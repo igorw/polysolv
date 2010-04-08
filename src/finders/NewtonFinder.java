@@ -17,6 +17,11 @@ public class NewtonFinder implements FinderInterface {
 	private double a/*, b, c, d*/;
 	
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
+		// can only solve starting grade 3
+		if (f.getMaxGrade() < 3) {
+			throw new InvalidFuncException("NewtonFinder only supports grade >= 3");
+		}
+		
 		Vector<Double> results = new Vector<Double>();
 		
 		a = f.getKoeff(3);
@@ -38,8 +43,6 @@ public class NewtonFinder implements FinderInterface {
 		} else if (f.getMaxGrade() > 3) {
 			// recursion
 			extrema = new NewtonFinder().find(fa);
-			System.out.println(fa);
-			System.out.println(extrema);
 		}
 		
 		// ableitung hat keine oder nur eine nullstelle
