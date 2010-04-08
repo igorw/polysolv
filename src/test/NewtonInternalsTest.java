@@ -18,9 +18,10 @@ public class NewtonInternalsTest {
 		assertFalse(NewtonFinder.signChange(-6.0, -1.0));
 	}
 	
-	/*@Test public void testFindRangeLeft() {
-		NewtonFinder newton = new NewtonFinder();
-		
-		result = newton.findRangeLeft(x, f)
-	}*/
+	@Test public void testRound() {
+		assertEquals((Double) 3.333, NewtonFinder.round(3.3333333));
+		assertEquals((Double) 1.0, NewtonFinder.round(1.0));
+		assertEquals((Double) 1.123, NewtonFinder.round(1.12345));
+		assertEquals((Double) (-1.123), NewtonFinder.round(-1.12345));
+	}
 }

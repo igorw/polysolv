@@ -109,7 +109,7 @@ public class NewtonFinder implements FinderInterface {
 	}
 	
 	// auf 3 stellen runden
-	public Double round(Double value) {
+	public static Double round(Double value) {
 		DecimalFormat df = new DecimalFormat("#.###");
 		return Double.valueOf(df.format(value));
 	}
