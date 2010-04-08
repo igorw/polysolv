@@ -8,8 +8,8 @@ import misc.PolyFunction;
 // mšgliche nullstellen: genau eine
 public class LinearFinder implements FinderInterface {
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
-		// can only solve up to grade 1
-		if (f.getMaxGrade() > 1) {
+		// can only solve grade 1
+		if (f.getMaxGrade() != 1) {
 			throw new InvalidFuncException("LinearFinder only supports grade <= 1");
 		}
 		

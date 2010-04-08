@@ -17,7 +17,7 @@ public class NewtonFinder implements FinderInterface {
 	private double a/*, b, c, d*/;
 	
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
-		// can only solve starting grade 3
+		// can only solve grade 3+
 		if (f.getMaxGrade() < 3) {
 			throw new InvalidFuncException("NewtonFinder only supports grade >= 3");
 		}
