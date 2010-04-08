@@ -42,7 +42,7 @@ public class NewtonFinder implements FinderInterface {
 			System.out.println(extrema);
 		}
 		
-		// ableitung hat keine nullstelle
+		// ableitung hat keine oder nur eine nullstelle
 		// an irgendeinem ort suchen
 		// f hat nur eine nullstelle
 		if (extrema.size() == 0 || extrema.size() == 1) {
@@ -61,8 +61,8 @@ public class NewtonFinder implements FinderInterface {
 		//
 		// => links suchen
 		Double firstElement = extrema.firstElement();
-		if (a > 0.0 && firstElement > 0.0 ||
-			a < 0.0 && firstElement < 0.0) {
+		if (a > 0.0 && f.calculate(firstElement) > 0.0 ||
+			a < 0.0 && f.calculate(firstElement) < 0.0) {
 			results.add(round(newton(f, firstElement - 1, newtonDepth)));
 		}
 		
@@ -87,8 +87,8 @@ public class NewtonFinder implements FinderInterface {
 		//
 		// => rechts suchen
 		Double lastElement = extrema.lastElement();
-		if (a > 0.0 && lastElement < 0.0 ||
-			a < 0.0 && lastElement > 0.0) {
+		if (a > 0.0 && f.calculate(lastElement) < 0.0 ||
+			a < 0.0 && f.calculate(lastElement) > 0.0) {
 			results.add(round(newton(f, lastElement + 1, newtonDepth)));
 		}
 		
@@ -110,8 +110,8 @@ public class NewtonFinder implements FinderInterface {
 	
 	// auf 3 stellen runden
 	public Double round(Double value) {
-		DecimalFormat twoDForm = new DecimalFormat("#.###");
-		return Double.valueOf(twoDForm.format(value));
+		DecimalFormat df = new DecimalFormat("#.###");
+		return Double.valueOf(df.format(value));
 	}
 	
 	// helper function to check if sign changed
