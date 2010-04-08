@@ -156,12 +156,9 @@ public class FinderTest {
 		try {
 			Vector<Double> results = finder.find(f1);
 			assertEquals(3, results.size());
-			assertTrue(!results.get(0).isNaN());
-			assertTrue(!results.get(0).isInfinite());
-			assertTrue(!results.get(1).isNaN());
-			assertTrue(!results.get(1).isInfinite());
-			assertTrue(!results.get(2).isNaN());
-			assertTrue(!results.get(2).isInfinite());
+			assertTrue(results.contains(-7.069));
+			assertTrue(results.contains(0.166));
+			assertTrue(results.contains(7.653));
 		} catch (InvalidFuncException e) {
 			fail();
 		}
@@ -170,7 +167,6 @@ public class FinderTest {
 	@Test public void testNewtonFinder7() {
 		FinderInterface finder = new NewtonFinder();
 		
-		// has division by 0 => NaN
 		// probeprüfung 2f (first part)
 		// -2.0x^3 + 6x
 		// results = -1.7320, 0, 1.7320
@@ -180,12 +176,9 @@ public class FinderTest {
 		try {
 			Vector<Double> results = finder.find(f1);
 			assertEquals(3, results.size());
-			assertTrue(!results.get(0).isNaN());
-			assertTrue(!results.get(0).isInfinite());
-			assertTrue(!results.get(1).isNaN());
-			assertTrue(!results.get(1).isInfinite());
-			assertTrue(!results.get(2).isNaN());
-			assertTrue(!results.get(2).isInfinite());
+			assertTrue(results.contains(-1.732));
+			assertTrue(results.contains(0.0));
+			assertTrue(results.contains(1.732));
 		} catch (InvalidFuncException e) {
 			fail();
 		}
