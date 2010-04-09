@@ -58,4 +58,27 @@ public class FrameworkTest {
 			// success
 		}
 	}
+	
+	// text maxGrade
+	@Test public void testPolyFunctionMaxGrade() {
+		PolyFunction f1 = new PolyFunction()
+			.setKoeff(4, 1.0);
+		assertEquals(4, f1.getMaxGrade());
+		
+		PolyFunction f2 = new PolyFunction()
+			.setKoeff(4, 1.0)
+			.setKoeff(2, 1.0);
+		assertEquals(4, f2.getMaxGrade());
+		
+		PolyFunction f3 = new PolyFunction()
+			.setKoeff(2, 1.0);
+		assertEquals(2, f3.getMaxGrade());
+		
+		// set a koeff to 0
+		PolyFunction f4 = new PolyFunction()
+			.setKoeff(1, 1.0)
+			.setKoeff(2, 1.0)
+			.setKoeff(2, 0.0);
+		assertEquals(1, f4.getMaxGrade());
+	}
 }
