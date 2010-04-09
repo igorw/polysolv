@@ -99,16 +99,21 @@ public class NewtonFinder implements FinderInterface {
 	}
 	
 	// recursive newton
-	// prevValue = startValue
 	// Xn+1 = Xn - (f(Xn) / f'(Xn))
-	public Double newton(PolyFunction f, Double prevValue, Integer depth) {
+	// depth > 0
+	// iterative implementation
+	public Double newton(PolyFunction f, Double startValue, Integer depth) {
 		PolyFunction fa = Differentiate.differentiate(f);
-		double x = prevValue - (f.calculate(prevValue) / fa.calculate(prevValue));
-		if (depth > 0) {
-			return newton(f, x, depth - 1);
-		} else {
-			return x;
-		}
+		
+		// initialize the new value
+		Double newValue = startValue;
+		
+		// calculate new value iteratively
+		do {
+			newValue = newValue - (f.calculate(newValue) / fa.calculate(newValue));
+		} while (--depth > 0);
+		
+		return newValue;
 	}
 	
 	// auf 3 stellen runden
