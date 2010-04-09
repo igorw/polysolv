@@ -112,7 +112,7 @@ public class NewtonFinder implements FinderInterface {
 	}
 	
 	// auf 3 stellen runden
-	public static Double round(Double value) {
+	static public Double round(Double value) {
 		DecimalFormat df = new DecimalFormat("#.###");
 		return Double.valueOf(df.format(value));
 	}
@@ -121,5 +121,10 @@ public class NewtonFinder implements FinderInterface {
 	static public boolean signChange(Double y1, Double y2) {
 		return (y1 < 0 && y2 > 0 ||
 				y1 > 0 && y2 < 0);
+	}
+	
+	// helper function to check if value is even or odd
+	static public boolean isEven(Integer value) {
+		return value % 2 == 0;
 	}
 }

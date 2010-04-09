@@ -24,4 +24,22 @@ public class NewtonInternalsTest {
 		assertEquals((Double) 1.123, NewtonFinder.round(1.12345));
 		assertEquals((Double) (-1.123), NewtonFinder.round(-1.12345));
 	}
+	
+	@Test public void testIsEven() {
+		assertEquals(true, NewtonFinder.isEven(0));
+		assertEquals(true, NewtonFinder.isEven(2));
+		assertEquals(true, NewtonFinder.isEven(4));
+		assertEquals(true, NewtonFinder.isEven(-2));
+		assertEquals(true, NewtonFinder.isEven(-4));
+		assertEquals(true, NewtonFinder.isEven(124356328));
+		assertEquals(true, NewtonFinder.isEven(-124356328));
+		assertEquals(false, NewtonFinder.isEven(1));
+		assertEquals(false, NewtonFinder.isEven(3));
+		assertEquals(false, NewtonFinder.isEven(5));
+		assertEquals(false, NewtonFinder.isEven(-1));
+		assertEquals(false, NewtonFinder.isEven(-3));
+		assertEquals(false, NewtonFinder.isEven(-5));
+		assertEquals(false, NewtonFinder.isEven(124356329));
+		assertEquals(false, NewtonFinder.isEven(-124356329));
+	}
 }
