@@ -75,6 +75,23 @@ public class NewtonFinder implements FinderInterface {
 			Double x1 = extrema.get(i);
 			Double x2 = extrema.get(i + 1);
 			
+			// first iteration, check x1
+			// nullstelle direkt auf extremum x1
+			if (i == 0 && f.calculate(x1) == 0.0) {
+				results.add(x1);
+				
+				// nächstes extremum kann keine nullstelle dazwischen haben
+				continue;
+			}
+			
+			// nullstelle direkt auf extremum x2
+			if (f.calculate(x2) == 0.0) {
+				results.add(x2);
+				
+				// vorheriges extremum kann keine nullstelle dazwischen haben
+				continue;
+			}
+			
 			// vorzeichen wechsel
 			// nullstelle suchen
 			if (signChange(f.calculate(x1), f.calculate(x2))) {
