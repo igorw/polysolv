@@ -262,4 +262,26 @@ public class FinderTest {
 			fail();
 		}
 	}
+	
+	@Test public void testNewtonFinder11() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// prüfung 6
+		// 1/3x^3 + x^2 - 24x + 14
+		// results = -10.3492, 0.6014, 6.7477
+		PolyFunction f1 = new PolyFunction().
+			setKoeff(3, 1.0/3.0).
+			setKoeff(2, 1.0).
+			setKoeff(1, -24.0).
+			setKoeff(0, 14.0);
+		try {
+			Vector<Double> results = finder.find(f1);
+			assertEquals(3, results.size());
+			assertTrue(results.contains(-10.349));
+			assertTrue(results.contains(0.601));
+			assertTrue(results.contains(6.748));
+		} catch (InvalidFuncException e) {
+			fail();
+		}
+	}
 }
