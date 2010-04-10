@@ -14,7 +14,7 @@ public class NewtonFinder implements FinderInterface {
 	// precision/depth of recursive newton algorithm
 	private int newtonDepth = 1000;
 	
-	private double a/*, b, c, d*/;
+	private double a, b, c, d;
 	
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
 		// can only solve grade 3+
@@ -25,9 +25,9 @@ public class NewtonFinder implements FinderInterface {
 		Vector<Double> results = new Vector<Double>();
 		
 		a = f.getKoeff(3);
-		/*b = f.getKoeff(2);
+		b = f.getKoeff(2);
 		c = f.getKoeff(1);
-		d = f.getKoeff(0);*/
+		d = f.getKoeff(0);
 		
 		// ableiten damit sie quadratisch ist
 		// nullstellen x koordinaten der abgeleiteten funktion
