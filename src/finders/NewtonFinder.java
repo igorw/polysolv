@@ -18,7 +18,7 @@ public class NewtonFinder implements FinderInterface {
 	
 	private double a, b, c, d;
 	
-	private Vector<Double> results;
+	private Vector<Double> results = new Vector<Double>();
 	
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
 		// can only solve grade 3+
