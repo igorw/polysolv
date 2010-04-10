@@ -7,6 +7,8 @@ import java.util.Vector;
 import misc.Differentiate;
 import misc.PolyFunction;
 
+import org.apache.commons.lang.StringUtils;
+
 // y = ax^3 + bx^2 + cx + d
 // mšgliche nullstellen 1-3
 public class NewtonFinder implements FinderInterface {
@@ -135,7 +137,12 @@ public class NewtonFinder implements FinderInterface {
 	
 	// auf 3 stellen runden
 	static public Double round(Double value) {
-		DecimalFormat df = new DecimalFormat("#.###");
+		return round(value, 3);
+	}
+	
+	// auf n stellen runden
+	static public Double round(Double value, Integer precision) {
+		DecimalFormat df = new DecimalFormat("#." + StringUtils.repeat("#", precision));
 		return Double.valueOf(df.format(value));
 	}
 	
