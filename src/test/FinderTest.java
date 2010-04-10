@@ -33,7 +33,7 @@ public class FinderTest {
 		}
 	}
 	
-	@Test public void testQuadraticFinder() {
+	@Test public void testQuadraticFinder1() {
 		FinderInterface finder = new QuadraticFinder();
 		
 		// probeprüfung 2b
@@ -48,6 +48,26 @@ public class FinderTest {
 			assertEquals(2, results.size());
 			assertTrue(results.contains(-2.0));
 			assertTrue(results.contains(6.0));
+		} catch (InvalidFuncException e) {
+			fail();
+		}
+	}
+	
+	@Test public void testQuadraticFinder2() {
+		FinderInterface finder = new QuadraticFinder();
+		
+		// prüfung 1a
+		// -2x^2 + 4x + 6
+		// results = -1, 3
+		PolyFunction f1 = new PolyFunction().
+			setKoeff(2, -2.0).
+			setKoeff(1, 4.0).
+			setKoeff(0, 6.0);
+		try {
+			Vector<Double> results = finder.find(f1);
+			assertEquals(2, results.size());
+			assertTrue(results.contains(-1.0));
+			assertTrue(results.contains(3.0));
 		} catch (InvalidFuncException e) {
 			fail();
 		}
@@ -179,6 +199,65 @@ public class FinderTest {
 			assertTrue(results.contains(-1.732));
 			assertTrue(results.contains(0.0));
 			assertTrue(results.contains(1.732));
+		} catch (InvalidFuncException e) {
+			fail();
+		}
+	}
+	
+	@Test public void testNewtonFinder8() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// tobias special case
+		// 1.5x^4 - x^3 - x^2 + 0.1
+		// results = 0.2930, 1.1880
+		PolyFunction f1 = new PolyFunction().
+			setKoeff(4, 1.5).
+			setKoeff(3, -1.0).
+			setKoeff(2, -1.0).
+			setKoeff(0, 0.1);
+		try {
+			Vector<Double> results = finder.find(f1);
+			assertEquals(2, results.size());
+			assertTrue(results.contains(0.293));
+			assertTrue(results.contains(1.188));
+		} catch (InvalidFuncException e) {
+			fail();
+		}
+	}
+	
+	@Test public void testNewtonFinder9() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// prüfung 1b
+		// 0.5x^4 - x^3
+		// results = 0, 2
+		PolyFunction f1 = new PolyFunction().
+			setKoeff(4, 0.5).
+			setKoeff(3, -1.0);
+		try {
+			Vector<Double> results = finder.find(f1);
+			assertEquals(2, results.size());
+			assertTrue(results.contains(0.0));
+			assertTrue(results.contains(2.0));
+		} catch (InvalidFuncException e) {
+			fail();
+		}
+	}
+	
+	@Test public void testNewtonFinder10() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// prüfung 1c
+		// -2x^3 + 3x^2
+		// results = 0, 1.5
+		PolyFunction f1 = new PolyFunction().
+			setKoeff(3, -2.0).
+			setKoeff(2, 3.0);
+		try {
+			Vector<Double> results = finder.find(f1);
+			assertEquals(2, results.size());
+			assertTrue(results.contains(0.0));
+			assertTrue(results.contains(1.5));
 		} catch (InvalidFuncException e) {
 			fail();
 		}

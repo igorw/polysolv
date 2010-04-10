@@ -18,13 +18,16 @@ public class NewtonFinder implements FinderInterface {
 	
 	private double a, b, c, d;
 	
+	private Vector<Double> results;
+	
 	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
 		// can only solve grade 3+
 		if (f.getMaxGrade() < 3) {
 			throw new InvalidFuncException("NewtonFinder only supports grade >= 3");
 		}
 		
-		Vector<Double> results = new Vector<Double>();
+		// initialize
+		results = new Vector<Double>();
 		
 		a = f.getKoeff(3);
 		b = f.getKoeff(2);
@@ -51,7 +54,7 @@ public class NewtonFinder implements FinderInterface {
 		// an irgendeinem ort suchen
 		// f hat nur eine nullstelle
 		if (extrema.size() == 0 || extrema.size() == 1) {
-			results.add(round(newton(f, 1.0, newtonDepth)));
+			addResult(newton(f, 1.0, newtonDepth));
 			return results;
 		}
 		
@@ -68,7 +71,7 @@ public class NewtonFinder implements FinderInterface {
 		Double firstElement = extrema.firstElement();
 		if (a > 0.0 && f.calculate(firstElement) > 0.0 ||
 			a < 0.0 && f.calculate(firstElement) < 0.0) {
-			results.add(round(newton(f, firstElement - 1, newtonDepth)));
+			addResult(newton(f, firstElement - 1, newtonDepth));
 		}
 		
 		// von erster bis vorletzer nullstelle
@@ -80,7 +83,7 @@ public class NewtonFinder implements FinderInterface {
 			// first iteration, check x1
 			// nullstelle direkt auf extremum x1
 			if (i == 0 && f.calculate(x1) == 0.0) {
-				results.add(x1);
+				addResult(x1);
 				
 				// nŠchstes extremum kann keine nullstelle dazwischen haben
 				continue;
@@ -88,7 +91,7 @@ public class NewtonFinder implements FinderInterface {
 			
 			// nullstelle direkt auf extremum x2
 			if (f.calculate(x2) == 0.0) {
-				results.add(x2);
+				addResult(x2);
 				
 				// vorheriges extremum kann keine nullstelle dazwischen haben
 				continue;
@@ -97,7 +100,7 @@ public class NewtonFinder implements FinderInterface {
 			// vorzeichen wechsel
 			// nullstelle suchen
 			if (signChange(f.calculate(x1), f.calculate(x2))) {
-				results.add(round(newton(f, (x1 + x2) / 2.0, newtonDepth)));
+				addResult(newton(f, (x1 + x2) / 2.0, newtonDepth));
 			}
 		}
 		
@@ -111,7 +114,7 @@ public class NewtonFinder implements FinderInterface {
 		Double lastElement = extrema.lastElement();
 		if (a > 0.0 && f.calculate(lastElement) < 0.0 ||
 			a < 0.0 && f.calculate(lastElement) > 0.0) {
-			results.add(round(newton(f, lastElement + 1, newtonDepth)));
+			addResult(newton(f, lastElement + 1, newtonDepth));
 		}
 		
 		return results;
@@ -133,6 +136,19 @@ public class NewtonFinder implements FinderInterface {
 		} while (--depth > 0);
 		
 		return newValue;
+	}
+	
+	// clean a result and add it to results
+	public void addResult(Double result) {
+		// prevent -0.0 issues
+		if (result == -0.0) {
+			result = 0.0;
+		}
+		
+		// round
+		result = round(result);
+		
+		results.add(result);
 	}
 	
 	// auf 3 stellen runden
