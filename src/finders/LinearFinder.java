@@ -7,7 +7,7 @@ import misc.PolyFunction;
 // y = ax + b
 // mšgliche nullstellen: genau eine
 public class LinearFinder implements FinderInterface {
-	public Vector<Double> find(PolyFunction f) throws InvalidFuncException {
+	public Vector<Double> find(PolyFunction f) {
 		// can only solve grade 1
 		if (f.getMaxGrade() != 1) {
 			throw new InvalidFuncException("LinearFinder only supports grade <= 1");
