@@ -143,7 +143,6 @@ public class NewtonFinder implements FinderInterface {
 		return newValue;
 	}
 	
-	
 	// Gibt Wert des Ausdrucks "b^2 * 4 * a * c" zurück (der Ableitung)
 	public Double quadraticCheck(PolyFunction f) {
 		PolyFunction fa = Differentiate.differentiate(f);
