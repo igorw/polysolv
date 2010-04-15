@@ -19,9 +19,7 @@ public class QuadraticFinder implements FinderInterface {
 		double b = f.getKoeff(1);
 		double c = f.getKoeff(0);
 		
-		// discriminant determines amount of solutions
-		// D = b^2 - 4ac
-		double discriminant = Math.pow(b, 2) - 4*a*c;
+		double discriminant = discriminant(a, b, c);
 		
 		if (discriminant > 0.0) {
 			// two solutions
@@ -44,5 +42,11 @@ public class QuadraticFinder implements FinderInterface {
 		}
 		
 		return results;
+	}
+
+	// discriminant determines amount of solutions
+	// D = b^2 - 4ac
+	static public double discriminant(Double a, Double b, Double c) {
+		return Math.pow(b, 2) - 4*a*c;
 	}
 }
