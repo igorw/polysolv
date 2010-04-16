@@ -24,13 +24,10 @@ public class FinderTest {
 		PolyFunction f1 = new PolyFunction().
 			setKoeff(1, -2.0/3.0).
 			setKoeff(0, 5.0);
-		try {
-			Vector<Double> results = finder.find(f1);
-			assertEquals(1, results.size());
-			assertEquals((Double) 7.5, results.firstElement());
-		} catch (InvalidFuncException e) {
-			fail();
-		}
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(1, results.size());
+		assertEquals((Double) 7.5, results.firstElement());
 	}
 	
 	@Test public void testQuadraticFinder1() {
@@ -43,14 +40,11 @@ public class FinderTest {
 			setKoeff(2, 0.5).
 			setKoeff(1, -2.0).
 			setKoeff(0, -6.0);
-		try {
-			Vector<Double> results = finder.find(f1);
-			assertEquals(2, results.size());
-			assertTrue(results.contains(-2.0));
-			assertTrue(results.contains(6.0));
-		} catch (InvalidFuncException e) {
-			fail();
-		}
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(2, results.size());
+		assertTrue(results.contains(-2.0));
+		assertTrue(results.contains(6.0));
 	}
 	
 	@Test public void testQuadraticFinder2() {
@@ -63,14 +57,11 @@ public class FinderTest {
 			setKoeff(2, -2.0).
 			setKoeff(1, 4.0).
 			setKoeff(0, 6.0);
-		try {
-			Vector<Double> results = finder.find(f1);
-			assertEquals(2, results.size());
-			assertTrue(results.contains(-1.0));
-			assertTrue(results.contains(3.0));
-		} catch (InvalidFuncException e) {
-			fail();
-		}
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(2, results.size());
+		assertTrue(results.contains(-1.0));
+		assertTrue(results.contains(3.0));
 	}
 	
 	@Test public void testNewtonFinder1() {
@@ -83,14 +74,11 @@ public class FinderTest {
 			setKoeff(3, 1.0).
 			setKoeff(1, -3.0).
 			setKoeff(0, -2.0);
-		try {
-			Vector<Double> results = finder.find(f1);
-			assertEquals(2, results.size());
-			assertTrue(results.contains(-1.0));
-			assertTrue(results.contains(2.0));
-		} catch (InvalidFuncException e) {
-			fail();
-		}
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(2, results.size());
+		assertTrue(results.contains(-1.0));
+		assertTrue(results.contains(2.0));
 	}
 	
 	@Test public void testNewtonFinder2() {
@@ -100,13 +88,10 @@ public class FinderTest {
 		// result = 0
 		PolyFunction f1 = new PolyFunction().
 			setKoeff(3, 1.0);
-		try {
-			Vector<Double> results = finder.find(f1);
-			assertEquals(1, results.size());
-			assertEquals((Double) 0.0, results.firstElement());
-		} catch (InvalidFuncException e) {
-			fail();
-		}
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(1, results.size());
+		assertEquals((Double) 0.0, results.firstElement());
 	}
 	
 	@Test public void testNewtonFinder3() {
@@ -118,13 +103,10 @@ public class FinderTest {
 		PolyFunction f1 = new PolyFunction().
 			setKoeff(3, -1.0).
 			setKoeff(1, -3.0);
-		try {
-			Vector<Double> results = finder.find(f1);
-			assertEquals(1, results.size());
-			assertEquals((Double) 0.0, results.firstElement());
-		} catch (InvalidFuncException e) {
-			fail();
-		}
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(1, results.size());
+		assertEquals((Double) 0.0, results.firstElement());
 	}
 	
 	@Test public void testNewtonFinder4() {
@@ -134,13 +116,10 @@ public class FinderTest {
 		// result = 0
 		PolyFunction f1 = new PolyFunction().
 			setKoeff(3, -1.0);
-		try {
-			Vector<Double> results = finder.find(f1);
-			assertEquals(1, results.size());
-			assertEquals((Double) 0.0, results.firstElement());
-		} catch (InvalidFuncException e) {
-			fail();
-		}
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(1, results.size());
+		assertEquals((Double) 0.0, results.firstElement());
 	}
 	
 	@Test public void testNewtonFinder5() {
@@ -152,14 +131,11 @@ public class FinderTest {
 		PolyFunction f1 = new PolyFunction().
 			setKoeff(4, -1.0/3.0).
 			setKoeff(3, 4.0/3.0);
-		try {
-			Vector<Double> results = finder.find(f1);
-			assertEquals(2, results.size());
-			assertTrue(results.contains(-1.0));
-			assertTrue(results.contains(2.0));
-		} catch (InvalidFuncException e) {
-			fail();
-		}
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(2, results.size());
+		assertTrue(results.contains(-1.0));
+		assertTrue(results.contains(2.0));
 	}
 	
 	@Test public void testNewtonFinder6() {
@@ -173,15 +149,12 @@ public class FinderTest {
 			setKoeff(2, -0.5).
 			setKoeff(1, -36.0).
 			setKoeff(0, 6.0);
-		try {
-			Vector<Double> results = finder.find(f1);
-			assertEquals(3, results.size());
-			assertTrue(results.contains(-7.069));
-			assertTrue(results.contains(0.166));
-			assertTrue(results.contains(7.653));
-		} catch (InvalidFuncException e) {
-			fail();
-		}
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(3, results.size());
+		assertTrue(results.contains(-7.069));
+		assertTrue(results.contains(0.166));
+		assertTrue(results.contains(7.653));
 	}
 	
 	@Test public void testNewtonFinder7() {
@@ -193,15 +166,12 @@ public class FinderTest {
 		PolyFunction f1 = new PolyFunction().
 			setKoeff(3, -2.0).
 			setKoeff(1, 6.0);
-		try {
-			Vector<Double> results = finder.find(f1);
-			assertEquals(3, results.size());
-			assertTrue(results.contains(-1.732));
-			assertTrue(results.contains(0.0));
-			assertTrue(results.contains(1.732));
-		} catch (InvalidFuncException e) {
-			fail();
-		}
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(3, results.size());
+		assertTrue(results.contains(-1.732));
+		assertTrue(results.contains(0.0));
+		assertTrue(results.contains(1.732));
 	}
 	
 	@Test public void testNewtonFinder8() {
@@ -215,14 +185,11 @@ public class FinderTest {
 			setKoeff(3, -1.0).
 			setKoeff(2, -1.0).
 			setKoeff(0, 0.1);
-		try {
-			Vector<Double> results = finder.find(f1);
-			assertEquals(2, results.size());
-			assertTrue(results.contains(0.293));
-			assertTrue(results.contains(1.188));
-		} catch (InvalidFuncException e) {
-			fail();
-		}
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(2, results.size());
+		assertTrue(results.contains(0.293));
+		assertTrue(results.contains(1.188));
 	}
 	
 	@Test public void testNewtonFinder9() {
@@ -234,14 +201,11 @@ public class FinderTest {
 		PolyFunction f1 = new PolyFunction().
 			setKoeff(4, 0.5).
 			setKoeff(3, -1.0);
-		try {
-			Vector<Double> results = finder.find(f1);
-			assertEquals(2, results.size());
-			assertTrue(results.contains(0.0));
-			assertTrue(results.contains(2.0));
-		} catch (InvalidFuncException e) {
-			fail();
-		}
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(2, results.size());
+		assertTrue(results.contains(0.0));
+		assertTrue(results.contains(2.0));
 	}
 	
 	@Test public void testNewtonFinder10() {
@@ -253,14 +217,11 @@ public class FinderTest {
 		PolyFunction f1 = new PolyFunction().
 			setKoeff(3, -2.0).
 			setKoeff(2, 3.0);
-		try {
-			Vector<Double> results = finder.find(f1);
-			assertEquals(2, results.size());
-			assertTrue(results.contains(0.0));
-			assertTrue(results.contains(1.5));
-		} catch (InvalidFuncException e) {
-			fail();
-		}
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(2, results.size());
+		assertTrue(results.contains(0.0));
+		assertTrue(results.contains(1.5));
 	}
 	
 	@Test public void testNewtonFinder11() {
@@ -274,14 +235,11 @@ public class FinderTest {
 			setKoeff(2, 1.0).
 			setKoeff(1, -24.0).
 			setKoeff(0, 14.0);
-		try {
-			Vector<Double> results = finder.find(f1);
-			assertEquals(3, results.size());
-			assertTrue(results.contains(-10.349));
-			assertTrue(results.contains(0.601));
-			assertTrue(results.contains(6.748));
-		} catch (InvalidFuncException e) {
-			fail();
-		}
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(3, results.size());
+		assertTrue(results.contains(-10.349));
+		assertTrue(results.contains(0.601));
+		assertTrue(results.contains(6.748));
 	}
 }
