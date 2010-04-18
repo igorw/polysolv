@@ -9,7 +9,6 @@ import misc.PolyFunction;
 import org.junit.Test;
 
 import finders.FinderInterface;
-import finders.InvalidFuncException;
 import finders.LinearFinder;
 import finders.NewtonFinder;
 import finders.QuadraticFinder;
