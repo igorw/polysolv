@@ -134,8 +134,8 @@ public class FinderTest {
 		
 		Vector<Double> results = finder.find(f1);
 		assertEquals(2, results.size());
-		assertTrue(results.contains(-1.0));
-		assertTrue(results.contains(2.0));
+		assertTrue(results.contains(0.0));
+		assertTrue(results.contains(4.0));
 	}
 	
 	@Test public void testNewtonFinder6() {
@@ -241,5 +241,40 @@ public class FinderTest {
 		assertTrue(results.contains(-10.349));
 		assertTrue(results.contains(0.601));
 		assertTrue(results.contains(6.748));
+	}
+	
+	@Test public void testNewtonFinder12() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// -7/6x^7 + 1/3x^4 + 4/3x^3
+		// results = -0.96499, 0, 1.09862
+		PolyFunction f1 = new PolyFunction().
+			setKoeff(7, -7.0/6.0).
+			setKoeff(4, 1.0/3.0).
+			setKoeff(3, 4.0/3.0);
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(3, results.size());
+		assertTrue(results.contains(-0.965));
+		assertTrue(results.contains(0.0));
+		assertTrue(results.contains(1.099));
+	}
+	
+	@Test public void testNewtonFinder13() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// teil von testNewtonFinder12
+		// ableitung hat nur eine nullstelle
+		// -245x^4 + 8x + 8
+		// results = -0.377575, 0.467902
+		PolyFunction f1 = new PolyFunction().
+			setKoeff(4, -245.0).
+			setKoeff(1, 8.0).
+			setKoeff(0, 8.0);
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(2, results.size());
+		assertTrue(results.contains(-0.378));
+		assertTrue(results.contains(0.468));
 	}
 }

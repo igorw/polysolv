@@ -16,7 +16,7 @@ public class NewtonFinder implements FinderInterface {
 	// precision/depth of recursive newton algorithm
 	private int newtonDepth = 1000;
 	
-	private double a, b, c, d;
+	private double a;
 	
 	private Vector<Double> results = new Vector<Double>();
 	
@@ -29,10 +29,7 @@ public class NewtonFinder implements FinderInterface {
 		// initialize
 		results = new Vector<Double>();
 		
-		a = f.getKoeff(3);
-		b = f.getKoeff(2);
-		c = f.getKoeff(1);
-		d = f.getKoeff(0);
+		a = f.getKoeff(f.getMaxGrade());
 		
 		// ableiten damit sie quadratisch ist
 		// nullstellen x koordinaten der abgeleiteten funktion
@@ -53,7 +50,7 @@ public class NewtonFinder implements FinderInterface {
 		// ableitung hat keine oder nur eine nullstelle
 		// an irgendeinem ort suchen
 		// f hat nur eine nullstelle
-		if (extrema.size() == 0 || extrema.size() == 1) {
+		if (extrema.size() < 2) {
 			addResult(newton(f, 1.0, newtonDepth));
 			return results;
 		}
@@ -61,18 +58,33 @@ public class NewtonFinder implements FinderInterface {
 		// extrema aufsteigend sortieren
 		Collections.sort(extrema);
 		
-		// positive 3ten grades
-		// erstes extremum Ÿber null
-		// ODER
-		// negative 3ten grades
-		// zweites extremum unter null
-		//
-		// => links suchen
 		Double firstElement = extrema.firstElement();
-		if (a > 0.0 && f.calculate(firstElement) > 0.0 ||
-			a < 0.0 && f.calculate(firstElement) < 0.0) {
-			addResult(newton(f, firstElement - 1, newtonDepth));
+		if (!isEven(f.getMaxGrade())) {
+			// positive 3ten grades
+			// erstes extremum Ÿber null
+			// ODER
+			// negative 3ten grades
+			// erstes extremum unter null
+			//
+			// => links suchen
+			if (a > 0.0 && f.calculate(firstElement) > 0.0 ||
+				a < 0.0 && f.calculate(firstElement) < 0.0) {
+					addResult(newton(f, firstElement - 1, newtonDepth));
+				}
+		} else {
+			// positive 4ten grades
+			// erstes extremum unter null
+			// ODER
+			// negative 4ten grades
+			// erstes extremum Ÿber null
+			//
+			// => links suchen
+			if (a > 0.0 && f.calculate(firstElement) < 0.0 ||
+				a < 0.0 && f.calculate(firstElement) > 0.0) {
+					addResult(newton(f, firstElement - 1, newtonDepth));
+				}
 		}
+		
 		
 		// von erster bis vorletzer nullstelle
 		// immer mit nŠchster vergleichen
@@ -108,7 +120,7 @@ public class NewtonFinder implements FinderInterface {
 		// erstes extremum unter null
 		// ODER
 		// negative 3ten grades
-		// zweites extremum Ÿber null
+		// erstes extremum Ÿber null
 		//
 		// => rechts suchen
 		Double lastElement = extrema.lastElement();
