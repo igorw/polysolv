@@ -8,10 +8,7 @@ Gruppe: Igor Wiedler, Reto Husmann
 
 ## Todo
 
-* Springender Newton (falls überhaupt möglich)
-* Sattelpunkte
-* 4ten Grades
-* nten Grades
+* Springender Newton
 
 ## Dependencies
 
