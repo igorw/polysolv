@@ -1,2 +1,2 @@
 #!/bin/bash
-java -cp bin ui/Cli
+java -cp bin:commons-lang-2.5.jar ui.Cli
