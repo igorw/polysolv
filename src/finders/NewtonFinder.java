@@ -53,12 +53,7 @@ public class NewtonFinder implements FinderInterface {
 		// ableitung hat keine oder nur eine nullstelle
 		// an irgendeinem ort suchen
 		// f hat nur eine nullstelle
-		// Wenn Ausdruck "b^2 * 4 * a * c" gleich Null ist, hat Ableitung
-		// nur eine Nullstelle, d.H Funktion nur ein Extrema --> bei 3. Grad also 1 Nullpunkt
-		// Wenn Ausdruck von oben kleiner 0 ist, wird wurzel aus negativer Zahl gezogen --> keine Lösung
-		// Bedeutet Ableitung hat kein Nullpunkt --> Funktion keine Extrema --> entartet!
-		// Newton wird an beliebiger Stelle angesetzt
-		if (quadraticCheck(f) == 0 || quadraticCheck(f) < 0) {
+		if (extrema.size() == 0 || extrema.size() == 1) {
 			addResult(newton(f, 1.0, newtonDepth));
 			return results;
 		}
@@ -141,20 +136,6 @@ public class NewtonFinder implements FinderInterface {
 		} while (--depth > 0);
 		
 		return newValue;
-	}
-	
-	// Gibt Wert des Ausdrucks "b^2 * 4 * a * c" zurück (der Ableitung)
-	public Double quadraticCheck(PolyFunction f) {
-		PolyFunction fa = Differentiate.differentiate(f);
-		
-		double ablA, ablB, ablC;
-		
-		ablA = fa.getKoeff(2);
-		ablB = fa.getKoeff(1);
-		ablC = fa.getKoeff(0);
-		
-		
-		return Math.pow(ablB, 2)-4*ablA*ablC;
 	}
 	
 	// clean a result and add it to results
