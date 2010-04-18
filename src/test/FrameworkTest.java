@@ -15,8 +15,8 @@ public class FrameworkTest {
 	// make sure PolyFunction is Cloneable
 	@Test public void testPolyFunctionClone() {
 		PolyFunction f = new PolyFunction().
-			setKoeff(1, 1.0).
-			setKoeff(0, 5.0);
+			setKoeff(1.0,	1).
+			setKoeff(5.0,	0);
 		
 		try {
 			PolyFunction f2 = f.clone();
@@ -30,8 +30,8 @@ public class FrameworkTest {
 	// empty koeffs should be 0
 	@Test public void testPolyFunctionEmptyKoeff() {
 		PolyFunction f = new PolyFunction().
-			setKoeff(2, 7.0).
-			setKoeff(0, 5.0);
+			setKoeff(7.0,	2).
+			setKoeff(5.0,	0);
 		
 		assertEquals((Double) 0.0, f.getKoeff(1));
 	}
@@ -62,23 +62,23 @@ public class FrameworkTest {
 	// text maxGrade
 	@Test public void testPolyFunctionMaxGrade() {
 		PolyFunction f1 = new PolyFunction()
-			.setKoeff(4, 1.0);
+			.setKoeff(1.0, 4);
 		assertEquals(4, f1.getMaxGrade());
 		
 		PolyFunction f2 = new PolyFunction()
-			.setKoeff(4, 1.0)
-			.setKoeff(2, 1.0);
+			.setKoeff(1.0, 4)
+			.setKoeff(1.0, 2);
 		assertEquals(4, f2.getMaxGrade());
 		
 		PolyFunction f3 = new PolyFunction()
-			.setKoeff(2, 1.0);
+			.setKoeff(1.0, 2);
 		assertEquals(2, f3.getMaxGrade());
 		
 		// set a koeff to 0
 		PolyFunction f4 = new PolyFunction()
-			.setKoeff(1, 1.0)
-			.setKoeff(2, 1.0)
-			.setKoeff(2, 0.0);
+			.setKoeff(1.0, 1)
+			.setKoeff(1.0, 2)
+			.setKoeff(0.0, 2);
 		assertEquals(1, f4.getMaxGrade());
 	}
 }

@@ -17,7 +17,7 @@ public class PolyFunction implements Iterable<Entry<Integer, Double>>, Cloneable
 		return hasKoeff(grade) ? koeffMap.get(grade) : 0.0;
 	}
 	
-	public PolyFunction setKoeff(Integer grade, Double koeff) {
+	public PolyFunction setKoeff(Double koeff, Integer grade) {
 		// ignore empty koeffs
 		if (koeff.equals(0.0) && !hasKoeff(grade)) {
 			return this;

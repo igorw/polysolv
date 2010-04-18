@@ -23,7 +23,7 @@ public class Cli {
 			PolyFunction f = new PolyFunction();
 			for (int i = grade; i >= 0; i--) {
 				System.out.print("x^" + i + ": ");
-				f.setKoeff(i, Double.valueOf(br.readLine()));
+				f.setKoeff(Double.valueOf(br.readLine()), i);
 			}
 			
 			System.out.println(f);

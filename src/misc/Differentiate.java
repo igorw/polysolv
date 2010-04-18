@@ -12,7 +12,7 @@ public class Differentiate {
 				// x^0 => 0
 				continue;
 			}
-			a.setKoeff(entry.getKey()-1, entry.getKey() * entry.getValue());
+			a.setKoeff(entry.getKey() * entry.getValue(), entry.getKey()-1);
 		}
 		
 		return a;
