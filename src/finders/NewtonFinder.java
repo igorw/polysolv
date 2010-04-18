@@ -47,10 +47,11 @@ public class NewtonFinder implements FinderInterface {
 			extrema = new NewtonFinder().find(fa);
 		}
 		
+		// polynom dritten grades
 		// ableitung hat keine oder nur eine nullstelle
 		// an irgendeinem ort suchen
 		// f hat nur eine nullstelle
-		if (extrema.size() < 2) {
+		if (f.getMaxGrade() == 3 && extrema.size() < 2) {
 			addResult(newton(f, 1.0, newtonDepth));
 			return results;
 		}
