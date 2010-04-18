@@ -117,11 +117,11 @@ public class NewtonFinder implements FinderInterface {
 			}
 		}
 		
-		// positive 3ten grades
-		// erstes extremum unter null
+		// positive 3ten/4ten grades
+		// letztes extremum unter null
 		// ODER
-		// negative 3ten grades
-		// erstes extremum Ÿber null
+		// negative 3ten/4ten grades
+		// letztes extremum Ÿber null
 		//
 		// => rechts suchen
 		Double lastElement = extrema.lastElement();
