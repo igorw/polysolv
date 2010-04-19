@@ -12,21 +12,6 @@ import finders.NewtonFinder;
 import finders.QuadraticFinder;
 
 public class FrameworkTest {
-	// make sure PolyFunction is Cloneable
-	@Test public void testPolyFunctionClone() {
-		PolyFunction f = new PolyFunction().
-			setKoeff(1.0,	1).
-			setKoeff(5.0,	0);
-		
-		try {
-			PolyFunction f2 = f.clone();
-			
-			assertEquals(f, f2);
-		} catch (CloneNotSupportedException e) {
-			fail();
-		}
-	}
-	
 	// empty koeffs should be 0
 	@Test public void testPolyFunctionEmptyKoeff() {
 		PolyFunction f = new PolyFunction().

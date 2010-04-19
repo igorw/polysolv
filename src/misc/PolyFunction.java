@@ -6,7 +6,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 // represents a polynomial function
-public class PolyFunction implements Iterable<Entry<Integer, Double>>, Cloneable {
+// ax^n + bx^(n-1) + cx^(n-2) ... zx^0
+public class PolyFunction implements Iterable<Entry<Integer, Double>> {
 	private Map<Integer, Double> koeffMap = new HashMap<Integer, Double>();
 	
 	// in case of change from primitive
@@ -117,11 +118,6 @@ public class PolyFunction implements Iterable<Entry<Integer, Double>>, Cloneable
         }
         
         return result;
-	}
-	
-	@Override
-	public PolyFunction clone() throws CloneNotSupportedException {
-		return (PolyFunction) super.clone();
 	}
 	
 	public Iterator<Entry<Integer, Double>> iterator() {
