@@ -21,27 +21,18 @@ public class FrameworkTest {
 		assertEquals((Double) 0.0, f.getKoeff(1));
 	}
 	
-	// do not accept bad PolyFunctions 
-	@Test public void testFinderInvalidFunc() {
+	// do not accept bad PolyFunctions
+	@Test(expected = InvalidFuncException.class) public void testLinearFinderInvalidFunc() {
 		PolyFunction f1 = new PolyFunction();
-		try {
-			new LinearFinder().find(f1);
-			fail();
-		} catch (InvalidFuncException e) {
-			// success
-		}
-		try {
-			new QuadraticFinder().find(f1);
-			fail();
-		} catch (InvalidFuncException e) {
-			// success
-		}
-		try {
-			new NewtonFinder().find(f1);
-			fail();
-		} catch (InvalidFuncException e) {
-			// success
-		}
+		new LinearFinder().find(f1);
+	}
+	@Test(expected = InvalidFuncException.class) public void testQuadraticFinderInvalidFunc() {
+		PolyFunction f1 = new PolyFunction();
+		new QuadraticFinder().find(f1);
+	}
+	@Test(expected = InvalidFuncException.class) public void testNewtonFinderInvalidFunc() {
+		PolyFunction f1 = new PolyFunction();
+		new NewtonFinder().find(f1);
 	}
 	
 	// text maxGrade
