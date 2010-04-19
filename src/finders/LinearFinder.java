@@ -15,8 +15,8 @@ public class LinearFinder implements FinderInterface {
 		
 		Vector<Double> results = new Vector<Double>();
 		
-		double a = f.getKoeff(1);
-		double b = f.getKoeff(0);
+		double a = f.getCoeff(1);
+		double b = f.getCoeff(0);
 		
 		// -b / a
 		double x = -b / a;

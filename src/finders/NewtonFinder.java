@@ -29,7 +29,7 @@ public class NewtonFinder implements FinderInterface {
 		// initialize
 		results = new Vector<Double>();
 		
-		a = f.getKoeff(f.getMaxGrade());
+		a = f.getCoeff(f.getMaxGrade());
 		
 		// ableiten damit sie quadratisch ist
 		// nullstellen x koordinaten der abgeleiteten funktion

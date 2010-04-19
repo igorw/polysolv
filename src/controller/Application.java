@@ -7,10 +7,10 @@ import finders.NewtonFinder;
 public class Application {
 	public void run() throws Exception {
 		PolyFunction f = new PolyFunction().
-			setKoeff(1.0,	3).
-			setKoeff(1.0,	2).
-			setKoeff(-3.0,	1).
-			setKoeff(1.0,	0);
+			setCoeff(1.0,	3).
+			setCoeff(1.0,	2).
+			setCoeff(-3.0,	1).
+			setCoeff(1.0,	0);
 		System.out.println(f);
 		
 		FinderInterface finder = new NewtonFinder();

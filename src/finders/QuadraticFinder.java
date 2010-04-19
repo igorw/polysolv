@@ -15,9 +15,9 @@ public class QuadraticFinder implements FinderInterface {
 		
 		Vector<Double> results = new Vector<Double>();
 		
-		double a = f.getKoeff(2);
-		double b = f.getKoeff(1);
-		double c = f.getKoeff(0);
+		double a = f.getCoeff(2);
+		double b = f.getCoeff(1);
+		double c = f.getCoeff(0);
 		
 		double discriminant = discriminant(a, b, c);
 		

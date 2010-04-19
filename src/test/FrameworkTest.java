@@ -12,13 +12,13 @@ import finders.NewtonFinder;
 import finders.QuadraticFinder;
 
 public class FrameworkTest {
-	// empty koeffs should be 0
-	@Test public void testPolyFunctionEmptyKoeff() {
+	// empty coeffs should be 0
+	@Test public void testPolyFunctionEmptyCoeff() {
 		PolyFunction f = new PolyFunction().
-			setKoeff(7.0,	2).
-			setKoeff(5.0,	0);
+			setCoeff(7.0,	2).
+			setCoeff(5.0,	0);
 		
-		assertEquals((Double) 0.0, f.getKoeff(1));
+		assertEquals((Double) 0.0, f.getCoeff(1));
 	}
 	
 	// do not accept bad PolyFunctions
@@ -38,23 +38,23 @@ public class FrameworkTest {
 	// text maxGrade
 	@Test public void testPolyFunctionMaxGrade() {
 		PolyFunction f1 = new PolyFunction()
-			.setKoeff(1.0, 4);
+			.setCoeff(1.0, 4);
 		assertEquals(4, f1.getMaxGrade());
 		
 		PolyFunction f2 = new PolyFunction()
-			.setKoeff(1.0, 4)
-			.setKoeff(1.0, 2);
+			.setCoeff(1.0, 4)
+			.setCoeff(1.0, 2);
 		assertEquals(4, f2.getMaxGrade());
 		
 		PolyFunction f3 = new PolyFunction()
-			.setKoeff(1.0, 2);
+			.setCoeff(1.0, 2);
 		assertEquals(2, f3.getMaxGrade());
 		
-		// set a koeff to 0
+		// set a coeff to 0
 		PolyFunction f4 = new PolyFunction()
-			.setKoeff(1.0, 1)
-			.setKoeff(1.0, 2)
-			.setKoeff(0.0, 2);
+			.setCoeff(1.0, 1)
+			.setCoeff(1.0, 2)
+			.setCoeff(0.0, 2);
 		assertEquals(1, f4.getMaxGrade());
 	}
 }
