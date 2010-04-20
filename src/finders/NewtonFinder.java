@@ -70,9 +70,10 @@ public class NewtonFinder implements FinderInterface {
 		if (isEven(f.getMaxGrade()) && extrema.size() == 1) {
 			// polynom geraden grades
 			// ableitung hat nur eine nullstelle
-			if (f.calculate(0.0) == 0.0) {
+			Double extremum = extrema.firstElement();
+			if (f.calculate(extremum) == 0.0) {
 				// nullstelle direkt auf 0
-				addResult(0.0);
+				addResult(extremum);
 				return results;
 			}
 		}
