@@ -349,4 +349,17 @@ public class FinderTest {
 		assertEquals(1, results.size());
 		assertTrue(results.contains(0.0));
 	}
+	
+	@Test public void testNewtonFinder19() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// x^7
+		// results = 0
+		PolyFunction f1 = new PolyFunction().
+			setCoeff(1.0, 7);
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(1, results.size());
+		assertTrue(results.contains(0.0));
+	}
 }
