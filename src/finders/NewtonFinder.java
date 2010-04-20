@@ -9,15 +9,26 @@ import misc.PolyFunction;
 
 import org.apache.commons.lang.StringUtils;
 
+// newtons algorithm
 // y = ax^3 + bx^2 + cx + d
 // mšgliche nullstellen 1-3
+//
+// y = ax^n + bx^(n-1) + cx^(n-2) ... zx^0
+// mšgliche nullstellen
+//	wenn n gerade: 0-n
+//	wenn n ungerade: 1-n
 public class NewtonFinder implements FinderInterface {
 	
 	// precision/depth of recursive newton algorithm
 	private int newtonDepth = 1000;
 	
+	// floating point precision
+	private int newtonPrecision = 3;
+	
+	// first coefficient
 	private double a;
 	
+	// resulting roots
 	private Vector<Double> results = new Vector<Double>();
 	
 	public Vector<Double> find(PolyFunction f) {
@@ -159,14 +170,9 @@ public class NewtonFinder implements FinderInterface {
 		}
 		
 		// round
-		result = round(result);
+		result = round(result, newtonPrecision);
 		
 		results.add(result);
-	}
-	
-	// auf 3 stellen runden
-	static public Double round(Double value) {
-		return round(value, 3);
 	}
 	
 	// auf n stellen runden

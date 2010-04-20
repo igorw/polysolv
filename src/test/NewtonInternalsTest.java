@@ -19,10 +19,10 @@ public class NewtonInternalsTest {
 	}
 	
 	@Test public void testRound() {
-		assertEquals((Double) 3.333, NewtonFinder.round(3.3333333));
-		assertEquals((Double) 1.0, NewtonFinder.round(1.0));
-		assertEquals((Double) 1.123, NewtonFinder.round(1.12345));
-		assertEquals((Double) (-1.123), NewtonFinder.round(-1.12345));
+		assertEquals((Double) 3.333, NewtonFinder.round(3.3333333, 3));
+		assertEquals((Double) 1.0, NewtonFinder.round(1.0, 3));
+		assertEquals((Double) 1.123, NewtonFinder.round(1.12345, 3));
+		assertEquals((Double) (-1.123), NewtonFinder.round(-1.12345, 3));
 	}
 	
 	@Test public void testIsEven() {
