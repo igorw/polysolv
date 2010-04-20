@@ -58,13 +58,23 @@ public class NewtonFinder implements FinderInterface {
 			extrema = new NewtonFinder().find(fa);
 		}
 		
-		// polynom ungeraden grades
-		// ableitung hat keine oder nur eine nullstelle
-		// an irgendeinem ort suchen
-		// f hat nur eine nullstelle
 		if (!isEven(f.getMaxGrade()) && extrema.size() < 2) {
+			// polynom ungeraden grades
+			// ableitung hat keine oder nur eine nullstelle
+			// an irgendeinem ort suchen
+			// f hat nur eine nullstelle
 			addResult(newton(f, 1.0, newtonDepth));
 			return results;
+		}
+		
+		if (isEven(f.getMaxGrade()) && extrema.size() == 1) {
+			// polynom geraden grades
+			// ableitung hat nur eine nullstelle
+			if (f.calculate(0.0) == 0.0) {
+				// nullstelle direkt auf 0
+				addResult(0.0);
+				return results;
+			}
 		}
 		
 		// extrema aufsteigend sortieren
@@ -96,7 +106,6 @@ public class NewtonFinder implements FinderInterface {
 					addResult(newton(f, firstElement - 1, newtonDepth));
 				}
 		}
-		
 		
 		// von erster bis vorletzer nullstelle
 		// immer mit nŠchster vergleichen
