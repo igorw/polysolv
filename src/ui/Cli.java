@@ -33,8 +33,8 @@ public class Cli {
 			FinderInterface finder = null;
 			switch (grade) {
 				case 0:
-					System.out.println("no");
-					break;
+					System.out.println("No possible solution for grade 0");
+					return;
 				case 1:
 					finder = new LinearFinder();
 					break;
