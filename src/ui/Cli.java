@@ -4,9 +4,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Vector;
 
-import finders.NewtonFinder;
-
 import misc.PolyFunction;
+import finders.FinderInterface;
+import finders.LinearFinder;
+import finders.NewtonFinder;
+import finders.QuadraticFinder;
 
 public class Cli {
 	public void run() {
@@ -28,7 +30,23 @@ public class Cli {
 			
 			System.out.println(f);
 			
-			Vector<Double> results = new NewtonFinder().find(f);
+			FinderInterface finder = null;
+			switch (grade) {
+				case 0:
+					System.out.println("no");
+					break;
+				case 1:
+					finder = new LinearFinder();
+					break;
+				case 2:
+					finder = new QuadraticFinder();
+					break;
+				default:
+					finder = new NewtonFinder();
+					break;
+			}
+			
+			Vector<Double> results = finder.find(f);
 			
 			if (results.size() == 0) {
 				System.out.println("no result");

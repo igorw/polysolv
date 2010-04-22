@@ -362,4 +362,180 @@ public class FinderTest {
 		assertEquals(1, results.size());
 		assertTrue(results.contains(0.0));
 	}
+	
+	@Test public void testNewtonFinder20() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// x^4 - 81
+		// results = -3, 3
+		PolyFunction f1 = new PolyFunction().
+			setCoeff(1.0, 4).
+			setCoeff(-81.0, 0);
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(2, results.size());
+		assertTrue(results.contains(-3.0));
+		assertTrue(results.contains(3.0));
+	}
+	
+	@Test public void testNewtonFinder21() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// x^4 - 6x^2 + 8
+		// results = +- sqrt(3 +- 1)
+		PolyFunction f1 = new PolyFunction().
+			setCoeff(1.0, 4).
+			setCoeff(-6.0, 2).
+			setCoeff(8.0, 0);
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(4, results.size());
+		assertTrue(results.contains(NewtonFinder.round(Math.sqrt(3 + 1), 3)));
+		assertTrue(results.contains(NewtonFinder.round(Math.sqrt(3 - 1), 3)));
+		assertTrue(results.contains(NewtonFinder.round(-Math.sqrt(3 + 1), 3)));
+		assertTrue(results.contains(NewtonFinder.round(-Math.sqrt(3 - 1), 3)));
+	}
+	
+	@Test public void testNewtonFinder22() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// x^4 + 2x^3 - 15x^2
+		// results = -5, 0, 3
+		PolyFunction f1 = new PolyFunction().
+			setCoeff(1.0, 4).
+			setCoeff(2.0, 3).
+			setCoeff(-15.0, 2);
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(3, results.size());
+		assertTrue(results.contains(-5.0));
+		assertTrue(results.contains(0.0));
+		assertTrue(results.contains(3.0));
+	}
+	
+	@Test public void testNewtonFinder23() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// lektion testfall 1
+		// x^3 - 1
+		// results = 1
+		PolyFunction f1 = new PolyFunction().
+			setCoeff(1.0, 3).
+			setCoeff(-1.0, 0);
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(1, results.size());
+		assertTrue(results.contains(1.0));
+	}
+	
+	@Test public void testNewtonFinder24() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// lektion testfall 2
+		// x^3 + 2
+		// results = -1.26
+		PolyFunction f1 = new PolyFunction().
+			setCoeff(1.0, 3).
+			setCoeff(2.0, 0);
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(1, results.size());
+		assertTrue(results.contains(-1.26));
+	}
+	
+	@Test public void testNewtonFinder25() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// lektion testfall 3
+		// x^3 - 2.3x^2 + 1.32x
+		// results = 1.1, 1.2, 0
+		PolyFunction f1 = new PolyFunction().
+			setCoeff(1.0, 3).
+			setCoeff(-2.3, 2).
+			setCoeff(1.32, 1);
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(3, results.size());
+		assertTrue(results.contains(0.0));
+		assertTrue(results.contains(1.1));
+		assertTrue(results.contains(1.2));
+	}
+	
+	@Test public void testNewtonFinder26() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// lektion testfall 4
+		// x^3 + 520x^2 - 0.25x - 130
+		// results = -520, -0.5, 0.5
+		PolyFunction f1 = new PolyFunction().
+			setCoeff(1.0, 3).
+			setCoeff(520.0, 2).
+			setCoeff(-0.25, 1).
+			setCoeff(-130.0, 0);
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(3, results.size());
+		assertTrue(results.contains(-520.0));
+		assertTrue(results.contains(-0.5));
+		assertTrue(results.contains(0.5));
+	}
+	
+	@Test public void testNewtonFinder27() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// potenzieller rundungsfehler
+		// lektion testfall 5
+		// 25x^3 - 170x^2 - 736x - 640
+		// results = -1.6, 10
+		PolyFunction f1 = new PolyFunction().
+			setCoeff(25.0, 3).
+			setCoeff(-170.0, 2).
+			setCoeff(-736.0, 1).
+			setCoeff(-640.0, 0);
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(2, results.size());
+		assertTrue(results.contains(-1.6));
+		assertTrue(results.contains(10.0));
+	}
+	
+	@Test public void testNewtonFinder28() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// lektion testfall 7
+		// x^4 - 9.2x^3 + 30.2x^2 - 41.2x + 19.2
+		// results = 1, 2, 3, 3.2
+		PolyFunction f1 = new PolyFunction().
+			setCoeff(1.0, 4).
+			setCoeff(-9.2, 3).
+			setCoeff(30.2, 2).
+			setCoeff(-41.2, 1).
+			setCoeff(19.2, 0);
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(4, results.size());
+		assertTrue(results.contains(1.0));
+		assertTrue(results.contains(2.0));
+		assertTrue(results.contains(3.0));
+		assertTrue(results.contains(3.2));
+	}
+	
+	@Test public void testNewtonFinder29() {
+		FinderInterface finder = new NewtonFinder();
+		
+		// lektion testfall 8
+		// x^4 - 6x^3 - 11x^2 + 60x + 100
+		// results = -2, 5
+		PolyFunction f1 = new PolyFunction().
+			setCoeff(1.0, 4).
+			setCoeff(-6.0, 3).
+			setCoeff(-11.0, 2).
+			setCoeff(60.0, 1).
+			setCoeff(100.0, 0);
+		
+		Vector<Double> results = finder.find(f1);
+		assertEquals(2, results.size());
+		assertTrue(results.contains(-2.0));
+		assertTrue(results.contains(5.0));
+	}
 }

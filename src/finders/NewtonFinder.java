@@ -25,6 +25,9 @@ public class NewtonFinder implements FinderInterface {
 	// floating point precision
 	private int newtonPrecision = 3;
 	
+	// floating point precision
+	private int calculatePrecision = 10;
+	
 	// first coefficient
 	private double a;
 	
@@ -63,7 +66,13 @@ public class NewtonFinder implements FinderInterface {
 			// ableitung hat keine oder nur eine nullstelle
 			// an irgendeinem ort suchen
 			// f hat nur eine nullstelle
-			addResult(newton(f, 1.0, newtonDepth));
+			Double tmpResult = newton(f, 1.0, newtonDepth);
+			if (tmpResult.isNaN()) {
+				// war schlechter startwert
+				// neuen startwert wŠhlen
+				tmpResult = newton(f, 2.0, newtonDepth);
+			}
+			addResult(tmpResult);
 			return results;
 		}
 		
@@ -71,7 +80,7 @@ public class NewtonFinder implements FinderInterface {
 			// polynom geraden grades
 			// ableitung hat nur eine nullstelle
 			Double extremum = extrema.firstElement();
-			if (f.calculate(extremum) == 0.0) {
+			if (round(f.calculate(extremum), calculatePrecision) == 0.0) {
 				// nullstelle direkt auf 0
 				addResult(extremum);
 				return results;
@@ -90,8 +99,8 @@ public class NewtonFinder implements FinderInterface {
 			// erstes extremum unter null
 			//
 			// => links suchen
-			if (a > 0.0 && f.calculate(firstElement) > 0.0 ||
-				a < 0.0 && f.calculate(firstElement) < 0.0) {
+			if (a > 0.0 && round(f.calculate(firstElement), calculatePrecision) > 0.0 ||
+				a < 0.0 && round(f.calculate(firstElement), calculatePrecision) < 0.0) {
 					addResult(newton(f, firstElement - 1, newtonDepth));
 				}
 		} else {
@@ -102,8 +111,8 @@ public class NewtonFinder implements FinderInterface {
 			// erstes extremum Ÿber null
 			//
 			// => links suchen
-			if (a > 0.0 && f.calculate(firstElement) < 0.0 ||
-				a < 0.0 && f.calculate(firstElement) > 0.0) {
+			if (a > 0.0 && round(f.calculate(firstElement), calculatePrecision) < 0.0 ||
+				a < 0.0 && round(f.calculate(firstElement), calculatePrecision) > 0.0) {
 					addResult(newton(f, firstElement - 1, newtonDepth));
 				}
 		}
@@ -116,7 +125,7 @@ public class NewtonFinder implements FinderInterface {
 			
 			// first iteration, check x1
 			// nullstelle direkt auf extremum x1
-			if (i == 0 && f.calculate(x1) == 0.0) {
+			if (i == 0 && round(f.calculate(x1), calculatePrecision) == 0.0) {
 				addResult(x1);
 				
 				// nŠchstes extremum kann keine nullstelle dazwischen haben
@@ -124,7 +133,7 @@ public class NewtonFinder implements FinderInterface {
 			}
 			
 			// nullstelle direkt auf extremum x2
-			if (f.calculate(x2) == 0.0) {
+			if (round(f.calculate(x2), calculatePrecision) == 0.0) {
 				addResult(x2);
 				
 				// vorheriges extremum kann keine nullstelle dazwischen haben
@@ -146,8 +155,8 @@ public class NewtonFinder implements FinderInterface {
 		//
 		// => rechts suchen
 		Double lastElement = extrema.lastElement();
-		if (a > 0.0 && f.calculate(lastElement) < 0.0 ||
-			a < 0.0 && f.calculate(lastElement) > 0.0) {
+		if (a > 0.0 && round(f.calculate(lastElement), calculatePrecision) < 0.0 ||
+			a < 0.0 && round(f.calculate(lastElement), calculatePrecision) > 0.0) {
 			addResult(newton(f, lastElement + 1, newtonDepth));
 		}
 		
