@@ -6,6 +6,9 @@ import misc.PolyFunction;
 
 import org.junit.Test;
 
+import factory.AbstractFinderFactory;
+import factory.FinderFactory;
+import factory.FinderNotFoundException;
 import finders.InvalidFuncException;
 import finders.LinearFinder;
 import finders.NewtonFinder;
@@ -56,5 +59,13 @@ public class FrameworkTest {
 			.setCoeff(1.0, 2)
 			.setCoeff(0.0, 2);
 		assertEquals(1, f4.getMaxGrade());
+	}
+	
+	@Test(expected = FinderNotFoundException.class) public void testFinderFactoryInvalidFunc() {
+		AbstractFinderFactory factory = new FinderFactory();
+		
+		PolyFunction f1 = new PolyFunction().
+			setCoeff(1.0, 0);
+		factory.getFinder(f1);
 	}
 }
