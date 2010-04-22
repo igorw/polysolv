@@ -5,10 +5,9 @@ import java.io.InputStreamReader;
 import java.util.Vector;
 
 import misc.PolyFunction;
+import factory.FinderFactory;
+import factory.FinderNotFoundException;
 import finders.FinderInterface;
-import finders.LinearFinder;
-import finders.NewtonFinder;
-import finders.QuadraticFinder;
 
 public class Cli {
 	public void run() {
@@ -30,21 +29,7 @@ public class Cli {
 			
 			System.out.println(f);
 			
-			FinderInterface finder = null;
-			switch (grade) {
-				case 0:
-					System.out.println("No possible solution for grade 0");
-					return;
-				case 1:
-					finder = new LinearFinder();
-					break;
-				case 2:
-					finder = new QuadraticFinder();
-					break;
-				default:
-					finder = new NewtonFinder();
-					break;
-			}
+			FinderInterface finder = new FinderFactory().getFinder(f);
 			
 			Vector<Double> results = finder.find(f);
 			
@@ -57,6 +42,9 @@ public class Cli {
 				}
 			}
 			
+		} catch (FinderNotFoundException e) {
+			System.out.println(e.getMessage());
+			System.exit(1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
