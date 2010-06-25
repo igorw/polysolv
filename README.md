@@ -18,3 +18,7 @@ Gruppe: Igor Wiedler, Reto Husmann
 
 * Fundamentum
 * Aufgaben und Prüfungen aus dem Unterricht
+
+## License
+
+See LICENSE.
