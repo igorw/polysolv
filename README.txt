@@ -6,10 +6,6 @@ Programm ausführen: ./polysolv
 
 Gruppe: Igor Wiedler, Reto Husmann
 
-## Todo
-
-* Springender Newton
-
 ## Dependencies
 
 * Java 1.6.0
