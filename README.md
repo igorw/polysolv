@@ -14,6 +14,10 @@ Gruppe: Igor Wiedler, Reto Husmann
 * Apache Commons Lang 2.5 (http://commons.apache.org)
   (http://www.apache.org/licenses/LICENSE-2.0.html)[Apache License 2.0]
 
+## Usage
+
+    ./polysolv
+
 ## Quellen
 
 * Fundamentum
