@@ -11,8 +11,6 @@ import finders.FinderInterface;
 
 public class Cli {
 	public void run() {
-		System.out.println("Welcome to PolynomialSolver");
-		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		try {
